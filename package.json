@@ -1,0 +1,33 @@
+{
+  "name": "beygla",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 8080",
+    "build": "next build",
+    "start": "next start -p 8080",
+    "lint": "next lint",
+    "filter-names": "ts-node -T -O '{\"module\":\"commonjs\"}' ./scripts/filter-names.ts",
+    "process-names": "ts-node -T -O '{\"module\":\"commonjs\"}' ./scripts/process-names.ts",
+    "group-names": "ts-node -T -O '{\"module\":\"commonjs\"}' ./scripts/group-names.ts",
+    "sankey-diagram": "ts-node -T -O '{\"module\":\"commonjs\"}' ./scripts/sankey-diagram.ts"
+  },
+  "dependencies": {
+    "@types/node": "18.11.9",
+    "@types/react": "18.0.24",
+    "@types/react-dom": "18.0.8",
+    "axios": "^1.1.3",
+    "gray-matter": "^4.0.3",
+    "next": "13.0.1",
+    "next-mdx-remote": "^4.1.0",
+    "node-fetch": "^3.2.10",
+    "prism-react-renderer": "^1.3.5",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "sass": "^1.55.0",
+    "typescript": "4.8.4"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.1"
+  }
+}
