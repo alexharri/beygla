@@ -1,5 +1,6 @@
 import { formatEnding } from "../declension/formatEnding";
 import { Trie } from "../types/Trie";
+import { simplifyTrie } from "./simplifyTrie";
 
 function insertIntoTrie(names: string[], trie: Trie) {
   const nf = names[0];
@@ -11,60 +12,31 @@ function insertIntoTrie(names: string[], trie: Trie) {
     soFar = char + soFar;
     if (!node.children[char]) {
       node.children[char] = {
-        soFar,
+        path: soFar,
         children: {},
-        ending: "",
+        value: "",
+        keys: [],
       };
     }
     node = node.children[char]!;
   }
-  node.ending = formatEnding(names);
+  node.value = formatEnding(names);
+  node.keys.push(nf);
 }
 
 export function createTrie(namesArr: string[][]) {
   const trie: Trie = {
-    soFar: "",
+    path: "",
     children: {},
-    ending: "",
+    value: "",
+    keys: [],
   };
 
   for (const names of namesArr) {
     insertIntoTrie(names, trie);
   }
 
-  simplify(trie);
+  simplifyTrie(trie);
 
   return trie;
-}
-
-function simplify(root: Trie) {
-  /** @returns common ending if there is one */
-  function dfs(node: Trie): string {
-    const children = Object.values(node.children);
-
-    if (children.length === 0) {
-      return node.ending;
-    }
-
-    let commonEnding = "";
-
-    const endings = children.map((child) => dfs(child!));
-
-    for (const ending of endings) {
-      if (!commonEnding) {
-        commonEnding = ending;
-        continue;
-      }
-
-      if (commonEnding !== ending) return "";
-    }
-
-    // There is a common ending
-    node.ending = commonEnding;
-    node.children = {};
-
-    return commonEnding;
-  }
-
-  dfs(root);
 }

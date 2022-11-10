@@ -1,5 +1,6 @@
 export interface Trie {
-  soFar: string;
+  path: string;
+  value: string;
   children: Partial<Record<string, Trie>>;
-  ending: string;
+  keys: string[];
 }

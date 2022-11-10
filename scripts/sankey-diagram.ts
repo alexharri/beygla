@@ -19,7 +19,7 @@ function count(node: Trie): number {
     sum += count(child!);
   }
 
-  if (!sum) sum++;
+  sum += node.keys.length;
 
   map.set(node, sum);
   return sum;
@@ -28,10 +28,10 @@ function count(node: Trie): number {
 function dfs(node: Trie) {
   for (const child of Object.values(node.children)) {
     dfs(child!);
-    if (node.soFar) {
-      out += `${node.soFar} [${count(child!)}] ${child!.soFar}${
-        child!.ending ? `(${child!.ending})` : ""
-      }\n`;
+    if (node.path) {
+      out += `${node.path} [${count(child!)}] ${child!.path} ${
+        child!.keys.length ? `(${child!.keys.join(", ")})` : ""
+      } ${child!.value ? `[${child!.value}]` : ""}\n`;
     }
   }
 }
