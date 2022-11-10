@@ -16,7 +16,7 @@ function count(node: Trie): number {
   let sum = 0;
 
   for (const child of Object.values(node.children)) {
-    sum += count(child!);
+    sum += count(child);
   }
 
   sum += node.keys.length;
@@ -27,15 +27,15 @@ function count(node: Trie): number {
 
 function dfs(node: Trie) {
   for (const child of Object.values(node.children)) {
-    dfs(child!);
+    dfs(child);
     if (node.path) {
-      out += `${node.path} [${count(child!)}] ${child!.path} ${
-        child!.keys.length ? `(${child!.keys.join(", ")})` : ""
-      } ${child!.value ? `[${child!.value}]` : ""}\n`;
+      out += `${node.path} [${count(child)}] ${child.path} ${
+        child.keys.length ? `(${child.keys.join(", ")})` : ""
+      } ${child.value ? `[${child.value}]` : ""}\n`;
     }
   }
 }
 
-dfs(trie.children.a!);
+dfs(trie.children.a);
 
 fs.writeFileSync(path.resolve(__dirname, "../out/sankey.txt"), out, "utf-8");

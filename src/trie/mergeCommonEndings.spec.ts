@@ -1,7 +1,7 @@
 import { Trie } from "../types/Trie";
-import { simplifyTrie } from "./simplifyTrie";
+import { mergeCommonEndings } from "./mergeCommonEndings";
 
-describe("simplifyTrie", () => {
+describe("mergeCommonEndings", () => {
   it("does not throw", () => {
     const basicTrie: Trie = {
       path: "",
@@ -9,6 +9,6 @@ describe("simplifyTrie", () => {
       children: {},
       keys: [],
     };
-    expect(() => simplifyTrie(basicTrie)).not.toThrow();
+    expect(() => mergeCommonEndings(basicTrie)).not.toThrow();
   });
 });

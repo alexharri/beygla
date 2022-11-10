@@ -1,6 +1,6 @@
 export interface Trie {
   path: string;
   value: string;
-  children: Partial<Record<string, Trie>>;
+  children: Record<string, Trie>;
   keys: string[];
 }

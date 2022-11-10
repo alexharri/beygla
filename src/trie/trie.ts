@@ -1,6 +1,7 @@
 import { formatEnding } from "../declension/formatEnding";
 import { Trie } from "../types/Trie";
-import { simplifyTrie } from "./simplifyTrie";
+import { mergeCommonEndings } from "./mergeCommonEndings";
+import { mergeLeafNodes } from "./mergeLeafNodes";
 
 function insertIntoTrie(names: string[], trie: Trie) {
   const nf = names[0];
@@ -18,7 +19,7 @@ function insertIntoTrie(names: string[], trie: Trie) {
         keys: [],
       };
     }
-    node = node.children[char]!;
+    node = node.children[char];
   }
   node.value = formatEnding(names);
   node.keys.push(nf);
@@ -36,7 +37,8 @@ export function createTrie(namesArr: string[][]) {
     insertIntoTrie(names, trie);
   }
 
-  simplifyTrie(trie);
+  mergeCommonEndings(trie);
+  mergeLeafNodes(trie);
 
   return trie;
 }
