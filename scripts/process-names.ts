@@ -1,7 +1,7 @@
 import path from "path";
 import fs from "fs";
 import zlib from "zlib";
-import { createTrie } from "../src/compress/trie/createTrie";
+import { createAndPopulateTrie } from "../src/compress/trie/createTrie";
 import { deserializeTrie, serializeTrie } from "../src/compress/trie/serialize";
 
 const filePath = path.resolve(__dirname, "../out/grouped-names.json");
@@ -12,11 +12,11 @@ const deserializedFile = path.resolve(__dirname, "../out/trie-deser.json");
 async function main() {
   const names: string[][] = JSON.parse(fs.readFileSync(filePath, "utf-8"));
 
-  const trie = createTrie(names);
+  const trie = createAndPopulateTrie(names);
 
   fs.writeFileSync(outFile, JSON.stringify(trie), "utf-8");
 
-  const serialized = serializeTrie(trie);
+  const serialized = serializeTrie(trie.getTrie());
   fs.writeFileSync(serializedFile, serialized, "utf-8");
   fs.writeFileSync(
     deserializedFile,

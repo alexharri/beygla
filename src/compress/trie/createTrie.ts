@@ -1,44 +1,15 @@
 import { formatDeclension } from "../declension";
-import { TrieNode } from "./trieTypes";
-import { mergeCommonEndings } from "./mergeCommonEndings";
-import { mergeLeafNodes } from "./mergeLeafNodes";
+import { Trie } from "./Trie";
 
-function insertIntoTrie(names: string[], trie: TrieNode) {
-  const nf = names[0];
-
-  let node = trie;
-  let soFar = "";
-
-  for (const char of nf.split("").reverse()) {
-    soFar = char + soFar;
-    if (!node.children[char]) {
-      node.children[char] = {
-        path: soFar,
-        children: {},
-        value: "",
-        keys: [],
-      };
-    }
-    node = node.children[char];
-  }
-  node.value = formatDeclension(names);
-  node.keys.push(nf);
-}
-
-export function createTrie(namesArr: string[][]) {
-  const trie: TrieNode = {
-    path: "",
-    children: {},
-    value: "",
-    keys: [],
-  };
+export function createAndPopulateTrie(namesArr: string[][]) {
+  const trie = new Trie();
 
   for (const names of namesArr) {
-    insertIntoTrie(names, trie);
+    const declension = formatDeclension(names);
+    trie.insert(names[0], declension);
   }
 
-  mergeCommonEndings(trie);
-  mergeLeafNodes(trie);
+  trie.simplify();
 
   return trie;
 }

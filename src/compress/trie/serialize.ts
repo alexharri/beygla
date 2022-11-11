@@ -1,8 +1,6 @@
 import { NO_DECLENSION, NO_DECLENSION_MARKER } from "../declension";
 import { CompressedTrie, TrieNode } from "./trieTypes";
 
-const emptyNode: CompressedTrie = { children: {}, value: "" };
-
 export function serializeTrie(trie: TrieNode): string {
   function serializeKey(key: string) {
     return key.split("|").join("");

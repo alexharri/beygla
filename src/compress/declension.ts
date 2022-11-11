@@ -2,12 +2,13 @@ export const NO_DECLENSION = "0;,,,";
 export const NO_DECLENSION_MARKER = "~";
 
 export function formatDeclension(names: string[]): string {
-  let root = "";
+  const name = names[0];
 
+  let root = "";
   const minLen = Math.min(...names.map((name) => name.length));
 
   outer: for (let i = 0; i < minLen; i++) {
-    const char = names[0][i];
+    const char = name[i];
 
     for (const name of names) {
       if (name[i] !== char) {
@@ -18,7 +19,15 @@ export function formatDeclension(names: string[]): string {
     root += char;
   }
 
-  const subtract = names[0].length - root.length;
+  const subtract = name.length - root.length;
+
+  if (subtract > 9) {
+    // If this limit is reached in the future, update the serializer/deserializer
+    // to read 2+ digit numbers.
+    throw new Error(
+      `Declension subraction for name '${name}' exceeds 9 characters.`
+    );
+  }
 
   function getEnding(name: string) {
     return name.substr(root.length);
