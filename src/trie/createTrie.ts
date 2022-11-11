@@ -1,9 +1,9 @@
 import { formatEnding } from "../declension/formatEnding";
-import { ITrie } from "../types/Trie";
+import { TrieNode } from "../types/Trie";
 import { mergeCommonEndings } from "./mergeCommonEndings";
 import { mergeLeafNodes } from "./mergeLeafNodes";
 
-function insertIntoTrie(names: string[], trie: ITrie) {
+function insertIntoTrie(names: string[], trie: TrieNode) {
   const nf = names[0];
 
   let node = trie;
@@ -26,7 +26,7 @@ function insertIntoTrie(names: string[], trie: ITrie) {
 }
 
 export function createTrie(namesArr: string[][]) {
-  const trie: ITrie = {
+  const trie: TrieNode = {
     path: "",
     children: {},
     value: "",

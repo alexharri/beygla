@@ -1,14 +1,14 @@
 import { formatEnding } from "../declension/formatEnding";
-import { ITrie } from "../types/Trie";
+import { TrieNode } from "../types/Trie";
 import { mergeCommonEndings } from "./mergeCommonEndings";
 import { mergeLeafNodes } from "./mergeLeafNodes";
 
-function emptyNodeAtPath(path: string): ITrie {
+function emptyNodeAtPath(path: string): TrieNode {
   return { path, children: {}, value: "", keys: [] };
 }
 
 export class Trie {
-  private trie: ITrie = {
+  private trie: TrieNode = {
     path: "",
     value: "",
     children: {},
@@ -16,9 +16,10 @@ export class Trie {
   };
 
   get(key: string): string | null {
+    const accessors = this.splitKeyIntoAccessors(key);
     let node = this.trie;
-    for (const char of key.split("").reverse()) {
-      const next = node.children[char];
+    for (const accessor of accessors) {
+      const next = node.children[accessor];
       if (!next) break;
       node = next;
     }
@@ -26,9 +27,10 @@ export class Trie {
   }
 
   leafAtKeyExists(key: string): boolean {
+    const accessors = this.splitKeyIntoAccessors(key);
     let node = this.trie;
-    for (const char of key.split("").reverse()) {
-      const next = node.children[char];
+    for (const accessor of accessors) {
+      const next = node.children[accessor];
       if (!next) return false;
       node = next;
     }
@@ -75,5 +77,27 @@ export class Trie {
   mergeLeafNodes() {
     mergeLeafNodes(this.trie);
     return this;
+  }
+
+  splitKeyIntoAccessors(key: string): string[] {
+    const parts = [];
+    for (let i = 0; i < key.length; i++) {
+      if (key.substr(i, 1) !== "(") {
+        parts.push(key.substr(i, 1));
+        continue;
+      }
+      let j = 4; // at least "(a|b)"
+      while (i + j < key.length && key.substr(i + j, 1) !== ")") {
+        j++;
+      }
+      const insideParens = key
+        .substr(i + 1, i + j - 1)
+        .split("|")
+        .sort()
+        .join("|");
+      parts.push(insideParens);
+      i = i + j;
+    }
+    return parts.reverse();
   }
 }

@@ -1,7 +1,7 @@
-import { ITrie } from "../types/Trie";
+import { TrieNode } from "../types/Trie";
 
-export function mergeCommonEndings(root: ITrie) {
-  function dfs(node: ITrie): [ending: string, keys: string[]] {
+export function mergeCommonEndings(root: TrieNode) {
+  function dfs(node: TrieNode): [ending: string, keys: string[]] {
     const children = Object.values(node.children);
 
     if (children.length === 0) {
