@@ -4,3 +4,8 @@ export interface Trie {
   children: Record<string, Trie>;
   keys: string[];
 }
+
+export interface SmallTrie {
+  value: string;
+  children: Record<string, SmallTrie>;
+}
