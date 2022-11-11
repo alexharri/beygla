@@ -4,7 +4,7 @@ import zlib from "zlib";
 import path from "path";
 import { getNames } from "../src/preprocess/data/getNames";
 
-const outputFilePath = path.resolve(__dirname, "../data/names.csv");
+const outputFilePath = path.resolve(__dirname, "../out/names.csv");
 const inputFilePath = path.resolve(__dirname, "../data/words.csv");
 
 async function gzip() {
