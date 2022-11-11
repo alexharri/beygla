@@ -1,4 +1,4 @@
-import { Case } from "../types/Types";
+import { Case } from "../../types/Types";
 
 export function getCase(caseString: string): Case {
   switch (caseString) {

@@ -5,7 +5,7 @@ export interface TrieNode {
   keys: string[];
 }
 
-export interface SmallTrie {
+export interface CompressedTrie {
   value: string;
-  children: Record<string, SmallTrie>;
+  children: Record<string, CompressedTrie>;
 }

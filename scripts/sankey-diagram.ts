@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { SmallTrie, TrieNode } from "../src/types/Trie";
+import { CompressedTrie, TrieNode } from "../src/compress/trie/trieTypes";
 
 function serializeSankeyFull() {
   const trie: TrieNode = JSON.parse(
@@ -43,15 +43,15 @@ function serializeSankeyFull() {
 }
 
 function serializeSankeyMinimal() {
-  const trie: SmallTrie = JSON.parse(
+  const trie: CompressedTrie = JSON.parse(
     fs.readFileSync(path.resolve(__dirname, "../out/trie-deser.json"), "utf-8")
   );
 
   let out = "";
 
-  const map = new Map<SmallTrie, number>();
+  const map = new Map<CompressedTrie, number>();
 
-  function count(node: SmallTrie): number {
+  function count(node: CompressedTrie): number {
     if (map.has(node)) return map.get(node)!;
 
     let sum = 0;
@@ -66,7 +66,7 @@ function serializeSankeyMinimal() {
     return sum;
   }
 
-  function dfs(node: SmallTrie, path: string) {
+  function dfs(node: CompressedTrie, path: string) {
     for (const [key, child] of Object.entries(node.children)) {
       const currPath = [
         key.length > 1 ? `(${key.split("").join("|")})` : key,

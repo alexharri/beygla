@@ -1,6 +1,7 @@
-import { SmallTrie, TrieNode } from "../types/Trie";
+import { NO_DECLENSION, NO_DECLENSION_MARKER } from "../declension";
+import { CompressedTrie, TrieNode } from "./trieTypes";
 
-const emptyNode: SmallTrie = { children: {}, value: "" };
+const emptyNode: CompressedTrie = { children: {}, value: "" };
 
 export function serializeTrie(trie: TrieNode): string {
   function serializeKey(key: string) {
@@ -47,15 +48,34 @@ function isNumeric(c: string) {
   return /^[0-9]$/.test(c);
 }
 
-export function deserializeTrie(str: string): SmallTrie {
+export function deserializeTrie(str: string): CompressedTrie {
   let i = 0;
 
   const char = () => str.substr(i, 1);
   const next = () => i++;
 
-  function deserializeLeaf(): [node: SmallTrie, done: boolean] {
+  function deserializeLeaf(): [node: CompressedTrie, done: boolean] {
     const num = char();
-    next(); // Move to ','
+    next(); // Move to ';' or '~'
+
+    /** @todo refactor to reuse common logic */
+
+    function returnValue(
+      c: string,
+      value: string
+    ): [node: CompressedTrie, done: boolean] {
+      const node: CompressedTrie = { value, children: {} };
+      if (c === "!") return [node, true];
+      if (c === "-") return [node, false];
+      throw new Error(`Unexpected terminator '${c}'`);
+    }
+
+    if (num === NO_DECLENSION_MARKER) {
+      const c = char();
+      next(); // Move beyond terminator
+      return returnValue(c, NO_DECLENSION);
+    }
+
     next(); // Move to first part
 
     const parts: string[] = [];
@@ -72,10 +92,7 @@ export function deserializeTrie(str: string): SmallTrie {
       parts.push(part);
       next(); // Move beyond terminator
       if (i === 3) {
-        const node = { children: {}, value: `${num};${parts.join(",")}` };
-        if (c === "!") return [node, true];
-        if (c === "-") return [node, false];
-        throw new Error(`Unexpected terminator '${c}'`);
+        return returnValue(c, `${num};${parts.join(",")}`);
       }
       if (c !== ",") throw new Error(`Expected ',', got '${c}'`);
     }
@@ -94,22 +111,10 @@ export function deserializeTrie(str: string): SmallTrie {
     return key;
   }
 
-  function deserializeObject(): [node: SmallTrie, done: boolean] {
+  function deserializeObject(): [node: CompressedTrie, done: boolean] {
     next(); // Move to first property
 
-    const warnAndReturn = <T>(v: T) => {
-      console.warn(`Unexpected immediately closing object.`);
-      next();
-      return v;
-    };
-
-    if (i === 878) console.log({ c: char() });
-
-    // Immediately self-closing object, should not happen
-    if (char() === "-") return warnAndReturn([emptyNode, false]);
-    if (char() === "!") return warnAndReturn([emptyNode, false]);
-
-    const children: SmallTrie["children"] = {};
+    const children: CompressedTrie["children"] = {};
     while (true) {
       const key = deserializeKey();
       const [child, done] = deserialize();
@@ -125,14 +130,15 @@ export function deserializeTrie(str: string): SmallTrie {
     }
   }
 
-  function deserialize(): [node: SmallTrie, done: boolean] {
-    if (isNumeric(char())) {
+  function deserialize(): [node: CompressedTrie, done: boolean] {
+    const c = char();
+    if (c === NO_DECLENSION_MARKER || isNumeric(c)) {
       return deserializeLeaf();
     }
-    if (char() === "{") {
+    if (c === "{") {
       return deserializeObject();
     }
-    throw new Error(`Unexpected char '${char()}'`);
+    throw new Error(`Unexpected char '${c}'`);
   }
 
   const [trie] = deserialize();

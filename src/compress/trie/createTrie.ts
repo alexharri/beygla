@@ -1,5 +1,5 @@
-import { formatEnding } from "../declension/formatEnding";
-import { TrieNode } from "../types/Trie";
+import { formatDeclension } from "../declension";
+import { TrieNode } from "./trieTypes";
 import { mergeCommonEndings } from "./mergeCommonEndings";
 import { mergeLeafNodes } from "./mergeLeafNodes";
 
@@ -21,7 +21,7 @@ function insertIntoTrie(names: string[], trie: TrieNode) {
     }
     node = node.children[char];
   }
-  node.value = formatEnding(names);
+  node.value = formatDeclension(names);
   node.keys.push(nf);
 }
 

@@ -1,5 +1,5 @@
-import { formatEnding } from "../declension/formatEnding";
-import { TrieNode } from "../types/Trie";
+import { formatDeclension } from "../declension";
+import { TrieNode } from "./trieTypes";
 import { mergeCommonEndings } from "./mergeCommonEndings";
 import { mergeLeafNodes } from "./mergeLeafNodes";
 
@@ -55,7 +55,7 @@ export class Trie {
   }
 
   insertName(nameCases: string[]) {
-    this.insert(nameCases[0], formatEnding(nameCases));
+    this.insert(nameCases[0], formatDeclension(nameCases));
     return this;
   }
 

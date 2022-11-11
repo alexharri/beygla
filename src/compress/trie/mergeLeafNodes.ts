@@ -1,4 +1,4 @@
-import { TrieNode } from "../types/Trie";
+import { TrieNode } from "./trieTypes";
 
 export function mergeLeafNodes(root: TrieNode) {
   function dfs(node: TrieNode) {

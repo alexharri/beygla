@@ -1,4 +1,7 @@
-export function formatEnding(names: string[]) {
+export const NO_DECLENSION = "0;,,,";
+export const NO_DECLENSION_MARKER = "~";
+
+export function formatDeclension(names: string[]): string {
   let root = "";
 
   const minLen = Math.min(...names.map((name) => name.length));
@@ -21,5 +24,10 @@ export function formatEnding(names: string[]) {
     return name.substr(root.length);
   }
 
-  return `${subtract};${names.map((name) => getEnding(name)).join(",")}`;
+  const declension = `${subtract};${names
+    .map((name) => getEnding(name))
+    .join(",")}`;
+
+  if (declension === NO_DECLENSION) return NO_DECLENSION_MARKER;
+  return declension;
 }
