@@ -1,17 +1,17 @@
 import fs from "fs";
 import path from "path";
-import { SmallTrie, Trie } from "../src/types/Trie";
+import { SmallTrie, ITrie } from "../src/types/Trie";
 
 function serializeSankeyFull() {
-  const trie: Trie = JSON.parse(
+  const trie: ITrie = JSON.parse(
     fs.readFileSync(path.resolve(__dirname, "../out/trie.json"), "utf-8")
   );
 
   let out = "";
 
-  const map = new Map<Trie, number>();
+  const map = new Map<ITrie, number>();
 
-  function count(node: Trie): number {
+  function count(node: ITrie): number {
     if (map.has(node)) return map.get(node)!;
 
     let sum = 0;
@@ -26,7 +26,7 @@ function serializeSankeyFull() {
     return sum;
   }
 
-  function dfs(node: Trie) {
+  function dfs(node: ITrie) {
     for (const child of Object.values(node.children)) {
       dfs(child);
       if (node.path) {

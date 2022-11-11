@@ -1,7 +1,7 @@
-import { Trie } from "../types/Trie";
+import { ITrie } from "../types/Trie";
 
-export function mergeCommonEndings(root: Trie) {
-  function dfs(node: Trie): [ending: string, keys: string[]] {
+export function mergeCommonEndings(root: ITrie) {
+  function dfs(node: ITrie): [ending: string, keys: string[]] {
     const children = Object.values(node.children);
 
     if (children.length === 0) {
@@ -15,6 +15,8 @@ export function mergeCommonEndings(root: Trie) {
 
     for (const [ending, childKeys] of childResults) {
       keys.push(...childKeys);
+
+      if (!ending) return ["", []];
 
       if (!commonEnding) {
         commonEnding = ending;
@@ -37,5 +39,11 @@ export function mergeCommonEndings(root: Trie) {
     return [commonEnding, keys];
   }
 
-  dfs(root);
+  // Do not potentially merge the root.
+  //
+  // The root is not merged on the real dataset, but it makes
+  // testing harder.
+  for (const child of Object.values(root.children)) {
+    dfs(child);
+  }
 }

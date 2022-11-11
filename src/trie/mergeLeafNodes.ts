@@ -1,7 +1,7 @@
-import { Trie } from "../types/Trie";
+import { ITrie } from "../types/Trie";
 
-export function mergeLeafNodes(root: Trie) {
-  function dfs(node: Trie) {
+export function mergeLeafNodes(root: ITrie) {
+  function dfs(node: ITrie) {
     for (const child of Object.values(node.children)) {
       dfs(child);
     }
@@ -25,7 +25,7 @@ export function mergeLeafNodes(root: Trie) {
       keysByValue[child.value].names.push(...child.keys);
     }
 
-    const out: Trie["children"] = {};
+    const out: ITrie["children"] = {};
 
     for (const key of nonLeafKeys) {
       out[key] = node.children[key];

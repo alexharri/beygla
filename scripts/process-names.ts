@@ -1,7 +1,7 @@
 import path from "path";
 import fs from "fs";
 import zlib from "zlib";
-import { createTrie } from "../src/trie/trie";
+import { createTrie } from "../src/trie/createTrie";
 import { deserializeTrie, serializeTrie } from "../src/trie/serialize";
 
 const filePath = path.resolve(__dirname, "../out/grouped-names.json");

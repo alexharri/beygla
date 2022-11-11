@@ -1,18 +1,18 @@
-import { SmallTrie, Trie } from "../types/Trie";
+import { SmallTrie, ITrie } from "../types/Trie";
 
 const emptyNode: SmallTrie = { children: {}, value: "" };
 
-export function serializeTrie(trie: Trie): string {
+export function serializeTrie(trie: ITrie): string {
   function serializeKey(key: string) {
     return key.split("|").join("");
   }
 
-  function serializeLeaf(node: Trie, last: boolean): string {
+  function serializeLeaf(node: ITrie, last: boolean): string {
     const terminator = last ? "!" : "-";
     return node.value + terminator;
   }
 
-  function serialize(node: Trie, last: boolean): string {
+  function serialize(node: ITrie, last: boolean): string {
     let out = "";
 
     if (node.value) {

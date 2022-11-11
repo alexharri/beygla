@@ -1,7 +1,7 @@
-export interface Trie {
+export interface ITrie {
   path: string;
   value: string;
-  children: Record<string, Trie>;
+  children: Record<string, ITrie>;
   keys: string[];
 }
 
