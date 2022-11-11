@@ -1,4 +1,4 @@
-import { NO_DECLENSION, NO_DECLENSION_MARKER } from "../compress/declension";
+import { NO_DECLENSION, NO_DECLENSION_MARKER } from "../constants";
 import { CompressedTrie } from "../compress/trie/trieTypes";
 
 function isChar(c: string) {

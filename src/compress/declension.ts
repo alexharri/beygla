@@ -1,5 +1,4 @@
-export const NO_DECLENSION = "0;,,,";
-export const NO_DECLENSION_MARKER = "~";
+import { NO_DECLENSION, NO_DECLENSION_MARKER } from "../constants";
 
 export function formatDeclension(names: string[]): string {
   const name = names[0];
