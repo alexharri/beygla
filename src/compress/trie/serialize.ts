@@ -1,5 +1,4 @@
-import { NO_DECLENSION, NO_DECLENSION_MARKER } from "../../constants";
-import { CompressedTrie, TrieNode } from "./trieTypes";
+import { TrieNode } from "./trieTypes";
 
 export function serializeTrie(trie: TrieNode): string {
   function serializeKey(key: string) {
