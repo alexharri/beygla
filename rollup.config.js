@@ -1,7 +1,7 @@
 import typescript from "@rollup/plugin-typescript";
 
 const config = {
-  input: "lib/read/beygla.ts",
+  input: "lib/beygla.ts",
   external: [],
   output: [
     { file: `dist/beygla.js`, format: "cjs", exports: "auto" },
