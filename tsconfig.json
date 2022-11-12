@@ -15,6 +15,7 @@
   },
   "include": [
     "lib/**/*",
+    "scripts/**/*",
     "rollup.config.ts"
   ],
   "exclude": [
