@@ -1,26 +1,22 @@
-import { DeclinedName, UnprocessedName as RawName } from "../../compress/types";
+import { DeclinedName, UnprocessedName } from "../../compress/types";
 import { getCase } from "./case";
-import { getGender } from "./gender";
 
-export function getRawName(line: string): RawName {
-  const [base, _id, gender, name, caseString] = line.split(";");
+export function getRawName(line: string): UnprocessedName {
+  const [base, _id, _gender, name, caseString] = line.split(";");
 
   return {
     base,
-    gender,
     case: caseString,
     name,
   };
 }
 
-export function formatName(name: RawName): DeclinedName {
+export function formatName(name: UnprocessedName): DeclinedName {
   const nameCase = getCase(name.case);
-  const gender = getGender(name.gender);
 
   return {
     base: name.base,
     name: name.name,
     case: nameCase,
-    gender,
   };
 }
