@@ -6,7 +6,7 @@ import { deserializeTrie } from "../src/read/deserialize";
 import { gzipFile } from "../src/preprocess/utils/gzip";
 
 const filePath = path.resolve(__dirname, "../out/grouped-names.json");
-const outFile = path.resolve(__dirname, "../out/trie.json");
+const outFile = path.resolve(__dirname, "../out/trie-full.json");
 const serializedFile = path.resolve(__dirname, "../out/trie-ser.txt");
 const deserializedFile = path.resolve(__dirname, "../out/trie-deser.json");
 

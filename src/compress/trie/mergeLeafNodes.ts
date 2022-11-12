@@ -33,7 +33,7 @@ export function mergeLeafNodes(root: TrieNode) {
     for (const [value, { keys, names }] of Object.entries(keysByValue)) {
       if (keys.length > 1) keys.sort(); // Make keys deterministic, easier to test.
 
-      out[keys.join("|")] = {
+      out[keys.join("")] = {
         path:
           keys.length === 1
             ? keys[0] + node.path

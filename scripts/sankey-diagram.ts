@@ -4,7 +4,7 @@ import { CompressedTrie, TrieNode } from "../src/compress/trie/trieTypes";
 
 function serializeSankeyFull() {
   const trie: TrieNode = JSON.parse(
-    fs.readFileSync(path.resolve(__dirname, "../out/trie.json"), "utf-8")
+    fs.readFileSync(path.resolve(__dirname, "../out/trie-full.json"), "utf-8")
   );
 
   let out = "";

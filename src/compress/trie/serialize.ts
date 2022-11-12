@@ -1,10 +1,6 @@
 import { TrieNode } from "./trieTypes";
 
 export function serializeTrie(trie: TrieNode): string {
-  function serializeKey(key: string) {
-    return key.split("|").join("");
-  }
-
   function serializeLeaf(node: TrieNode, last: boolean): string {
     const terminator = last ? "!" : "-";
     return node.value + terminator;
@@ -22,7 +18,7 @@ export function serializeTrie(trie: TrieNode): string {
     out += Object.entries(node.children)
       .map(([key, child], i, arr) => {
         const last = i === arr.length - 1;
-        return `${serializeKey(key)}:${serialize(child, last)}`;
+        return `${key}:${serialize(child, last)}`;
       })
       .join("");
 

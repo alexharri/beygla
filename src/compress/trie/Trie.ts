@@ -86,18 +86,31 @@ export class Trie {
         parts.push(key.substr(i, 1));
         continue;
       }
-      let j = 4; // at least "(a|b)"
+      // Given the input string '(a|b...)':
+      //
+      //    j = 0 points to '('
+      //    j = 4 points to '|' or ')'
+      //
+      // A union leaf node's key will never be shorter than '(a|b)'
+      let j = 4;
       while (i + j < key.length && key.substr(i + j, 1) !== ")") {
         j++;
       }
-      const insideParens = key
-        .substr(i + 1, i + j - 1)
-        .split("|")
-        .sort()
-        .join("|");
-      parts.push(insideParens);
+      const insideParens = key.substr(i + 1, i + j - 1);
+
+      // Sort to make union leaf node keys deterministic. It makes
+      // testing easier.
+      //
+      // Also remove '|'. It's just for presentational purposes when
+      // testing.
+      const part = insideParens.split("|").sort().join("");
+      parts.push(part);
       i = i + j;
     }
     return parts.reverse();
+  }
+
+  toJSON() {
+    return JSON.stringify(this.getTrie());
   }
 }

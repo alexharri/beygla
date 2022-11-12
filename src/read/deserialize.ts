@@ -9,7 +9,7 @@ function isNumeric(c: string) {
   return /^[0-9]$/.test(c);
 }
 
-const validTerminator = (c: string) => ["!", "-"].indexOf(c) === -1;
+const validTerminator = (c: string) => ["!", "-"].indexOf(c) !== -1;
 
 export function deserializeTrie(str: string): CompressedTrie {
   let i = 0;
