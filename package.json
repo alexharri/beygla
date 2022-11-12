@@ -7,6 +7,7 @@
     "test:watch": "jest --watchAll",
     "test:ci": "jest --ci --coverage",
     "build": "ts-node -T ./scripts/build.ts",
+    "prepare-list-of-names": "ts-node -T ./scripts/prepare-list-of-names.ts",
     "filter-names": "ts-node -T ./scripts/filter-names.ts",
     "process-names": "ts-node -T ./scripts/process-names.ts",
     "group-names": "ts-node -T ./scripts/group-names.ts",
