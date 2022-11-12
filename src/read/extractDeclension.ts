@@ -1,21 +1,21 @@
 import { CompressedTrie } from "../compress/trie/trieTypes";
 
 export function extractDeclension(
-  name: string,
-  trie: CompressedTrie
+  trie: CompressedTrie,
+  name: string
 ): string | null {
   let node = trie;
 
   for (const char of name.split("").reverse()) {
     const next = node.children[char];
 
-    if (next.value) {
-      // We've reached a leaf node, return the value
-      return next.value;
-    }
-
     if (next) {
-      // Keep traversing the trie
+      if (next.value) {
+        // We've reached a leaf node, return the value
+        return next.value;
+      }
+
+      // Non-leaf node. Keep traversing the trie
       node = next;
       continue;
     }
