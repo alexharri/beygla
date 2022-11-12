@@ -1,4 +1,4 @@
-import { DeclinedName, UnprocessedName as RawName } from "../../compress/Types";
+import { DeclinedName, UnprocessedName as RawName } from "../../compress/types";
 import { getCase } from "./case";
 import { getGender } from "./gender";
 

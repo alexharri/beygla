@@ -1,4 +1,4 @@
-import { Case } from "../../compress/Types";
+import { Case } from "../../compress/types";
 
 export function getCase(caseString: string): Case {
   switch (caseString) {
