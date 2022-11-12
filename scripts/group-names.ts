@@ -5,7 +5,7 @@ import { isDefiniteArticle } from "../src/preprocess/format/article";
 import { isCasePlural } from "../src/preprocess/format/case";
 import { formatName, getRawName } from "../src/preprocess/format/name";
 import { Case, DeclinedName } from "../src/types/Types";
-import { readGzippedFileLines } from "../src/preprocess/utils/readGzippedFile";
+import { readGzippedFileLines } from "../src/preprocess/utils/gzip";
 
 const namesFilePath = path.resolve(__dirname, "../out/names.csv.gz");
 

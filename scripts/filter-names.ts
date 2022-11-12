@@ -1,28 +1,11 @@
 import fs from "fs/promises";
 import fsSync from "fs";
-import zlib from "zlib";
 import path from "path";
 import { getNames } from "../src/preprocess/data/getNames";
+import { gzipFile } from "../src/preprocess/utils/gzip";
 
 const outputFilePath = path.resolve(__dirname, "../out/names.csv");
 const inputFilePath = path.resolve(__dirname, "../data/words.csv");
-
-async function gzip() {
-  const stream = fsSync.createReadStream(outputFilePath);
-  stream
-    .pipe(zlib.createGzip())
-    .pipe(fsSync.createWriteStream(outputFilePath + ".gz"))
-    .on("finish", () => {
-      const beforeZip = fsSync.statSync(outputFilePath);
-      const afterZip = fsSync.statSync(outputFilePath + ".gz");
-
-      const ratio = ((afterZip.size / beforeZip.size) * 100).toFixed(2);
-
-      console.log(
-        `Compressed output into a '.gz' file that is ${ratio}% of the original size`
-      );
-    });
-}
 
 async function main() {
   const start = Date.now();
@@ -56,7 +39,7 @@ async function main() {
     `Processed ${numerOfInputLines} words into ${numberOfNames} names in ${timeMs} ms`
   );
 
-  await gzip();
+  await gzipFile(outputFilePath);
 }
 
 main();
