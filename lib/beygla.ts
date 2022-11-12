@@ -1,5 +1,3 @@
-// This file constitutes the public API for this library
-
 import { deserializeTrie } from "./read/deserialize";
 import { extractDeclension } from "./read/extractDeclension";
 import serializedInput from "./read/serializedInput";
@@ -44,13 +42,29 @@ function declineName(name: string, declension: string, caseStr: Case): string {
   return root + appendices[caseIndex];
 }
 
-export function applyCase(name: string, caseStr: Case): string {
+/**
+ * This function can applies one of the following cases to a source name
+ * provided in the nominative case (nefnifall).
+ *
+ * - Nominative `nom` (nefnifall `nf` in Icelandic)
+ * - Accusative `acc` (þolfall `þf` in Icelandic)
+ * - Dative `dat` (þágufall `þgf` in Icelandic)
+ * - Genitive `gen` (eignarfall `ef` in Icelandic)
+ *
+ * @example
+ * ```tsx
+ * applyCase("ef", "Jóhann");
+ * //=> "Jóhannesar"
+ * ```
+ *
+ * The name provided must be an Icelandic name in the nominative case
+ * (nefnifall) or an unexpected output is likely.
+ *
+ * @param name - An Icelandic name in the nominative case (nefnifall)
+ * @param caseStr - The case to apply to the name to, e.g. `þf`
+ */
+export function applyCase(caseStr: Case, name: string): string {
   const declension = extractDeclension(trie, name);
   if (!declension) return name;
   return declineName(name, declension, caseStr);
-}
-
-export function hasDeclension(name: string): boolean {
-  const declension = extractDeclension(trie, name);
-  return !!declension;
 }
