@@ -1,14 +1,8 @@
 import { NO_DECLENSION, NO_DECLENSION_MARKER } from "../constants";
 import { CompressedTrie } from "../compress/trie/trieTypes";
 
-function isChar(c: string) {
-  return c.toLocaleLowerCase() !== c.toLocaleUpperCase();
-}
-
-function isNumeric(c: string) {
-  return /^[0-9]$/.test(c);
-}
-
+const isChar = (c: string) => c.toLowerCase() !== c.toUpperCase();
+const isNumeric = (c: string) => /^[0-9]$/.test(c);
 const validTerminator = (c: string) => ["!", "-"].indexOf(c) !== -1;
 
 export function deserializeTrie(str: string): CompressedTrie {
