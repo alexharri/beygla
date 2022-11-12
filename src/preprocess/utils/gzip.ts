@@ -26,13 +26,13 @@ export async function gzipFile(filePath: string) {
       const beforeZip = fs.statSync(filePath);
       const afterZip = fs.statSync(filePath + ".gz");
 
-      const ratio = ((afterZip.size / beforeZip.size) * 100).toFixed(2);
+      const percentage = ((afterZip.size / beforeZip.size) * 100).toFixed(2);
 
       const parts = filePath.split("/");
       const fileName = parts[parts.length - 1];
 
       console.log(
-        `Compressed '${fileName}.gz' to ${ratio}% of the original size`
+        `Compressed '${fileName}.gz' to ${percentage}% of the original size`
       );
     });
 }
