@@ -6,18 +6,25 @@ import serializedInput from "./read/serializedInput";
 
 const trie = deserializeTrie(serializedInput);
 
-const casesIs = ["nf", "þf", "þgf", "ef"] as const;
-const casesEn = ["nom", "acc", "dat", "gen"] as const;
+type Case =
+  // Icelandic cases
+  | "nf"
+  | "þf"
+  | "þgf"
+  | "ef"
+  // English cases
+  | "nom"
+  | "acc"
+  | "dat"
+  | "gen";
 
-type CaseIcelandic = typeof casesIs[number];
-type CaseEnglish = typeof casesEn[number];
-
-type Case = CaseIcelandic | CaseEnglish;
+const casesIs: Case[] = ["nf", "þf", "þgf", "ef"];
+const casesEn: Case[] = ["nom", "acc", "dat", "gen"];
 
 function getCaseIndex(caseStr: Case) {
-  const indexIs = casesIs.indexOf(caseStr as CaseIcelandic);
+  const indexIs = casesIs.indexOf(caseStr);
   if (indexIs !== -1) return indexIs;
-  const indexEn = casesEn.indexOf(caseStr as CaseEnglish);
+  const indexEn = casesEn.indexOf(caseStr);
   if (indexEn !== -1) return indexEn;
   return 0; // Fall back to 0 if an invalid case was provided
 }
