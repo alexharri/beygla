@@ -5,6 +5,8 @@
     "noUnusedLocals": true,
     "noImplicitAny": true,
     "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
     "lib": [
       "es2020",
     ],
