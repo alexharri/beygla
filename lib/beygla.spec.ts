@@ -44,7 +44,8 @@ describe("applyCase", () => {
 
   it("applies a cases to an input string as if it were a name", () => {
     type Case = "nf" | "þf" | "þgf" | "ef";
-    const tests: Array<[source: string, caseStr: Case, expected: string]> = [
+    type Test = [source: string, caseStr: Case, expected: string];
+    const tests: Test[] = [
       ["fantasía", "þf", "fantasíu"],
       ["Mamma", "ef", "Mömmu"],
     ];
