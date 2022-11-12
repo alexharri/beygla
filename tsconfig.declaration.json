@@ -14,7 +14,7 @@
     ]
   },
   "include": [
-    "lib/**/*",
+    "lib/read/beygla.ts",
     "rollup.config.ts"
   ],
   "exclude": [

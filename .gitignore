@@ -36,4 +36,5 @@ next-env.d.ts
 
 # custom
 /out
+/dist
 /data/words.csv

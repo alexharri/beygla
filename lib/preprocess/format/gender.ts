@@ -1,4 +1,4 @@
-import { Gender } from "../../types/Types";
+import { Gender } from "../../compress/Types";
 
 export function getGender(genderString: string): Gender {
   switch (genderString) {

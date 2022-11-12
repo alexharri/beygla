@@ -1,8 +1,8 @@
 import fs from "fs/promises";
 import fsSync from "fs";
 import path from "path";
-import { getNames } from "../src/preprocess/data/getNames";
-import { gzipFile } from "../src/preprocess/utils/gzip";
+import { getNames } from "../lib/preprocess/data/getNames";
+import { gzipFile } from "../lib/preprocess/utils/gzip";
 
 const outputFilePath = path.resolve(__dirname, "../out/names.csv");
 const inputFilePath = path.resolve(__dirname, "../data/words.csv");

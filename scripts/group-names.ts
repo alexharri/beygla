@@ -1,11 +1,11 @@
 import path from "path";
 import fs from "fs";
-import { getNames } from "../src/preprocess/data/getNames";
-import { isDefiniteArticle } from "../src/preprocess/format/article";
-import { isCasePlural } from "../src/preprocess/format/case";
-import { formatName, getRawName } from "../src/preprocess/format/name";
-import { Case, DeclinedName } from "../src/types/Types";
-import { readGzippedFileLines } from "../src/preprocess/utils/gzip";
+import { getNames } from "../lib/preprocess/data/getNames";
+import { isDefiniteArticle } from "../lib/preprocess/format/article";
+import { isCasePlural } from "../lib/preprocess/format/case";
+import { formatName, getRawName } from "../lib/preprocess/format/name";
+import { Case, DeclinedName } from "../lib/compress/Types";
+import { readGzippedFileLines } from "../lib/preprocess/utils/gzip";
 
 const namesFilePath = path.resolve(__dirname, "../out/names.csv.gz");
 

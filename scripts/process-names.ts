@@ -1,9 +1,9 @@
 import path from "path";
 import fs from "fs";
-import { createAndPopulateTrie } from "../src/compress/trie/createTrie";
-import { serializeTrie } from "../src/compress/trie/serialize";
-import { deserializeTrie } from "../src/read/deserialize";
-import { gzipFile } from "../src/preprocess/utils/gzip";
+import { createAndPopulateTrie } from "../lib/compress/trie/createTrie";
+import { serializeTrie } from "../lib/compress/trie/serialize";
+import { deserializeTrie } from "../lib/read/deserialize";
+import { gzipFile } from "../lib/preprocess/utils/gzip";
 
 const filePath = path.resolve(__dirname, "../out/grouped-names.json");
 const outFile = path.resolve(__dirname, "../out/trie-full.json");
