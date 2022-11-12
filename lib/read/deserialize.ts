@@ -1,5 +1,5 @@
-import { NO_DECLENSION, NO_DECLENSION_MARKER } from "../constants";
-import { CompressedTrie } from "../compress/trie/trieTypes";
+import { NO_DECLENSION, NO_DECLENSION_MARKER } from "../common/constants";
+import { CompressedTrie } from "../common/types";
 
 const isChar = (c: string) => c.toLowerCase() !== c.toUpperCase();
 const isNumeric = (c: string) => /^[0-9]$/.test(c);

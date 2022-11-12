@@ -1,10 +1,17 @@
 import { formatDeclension } from "../declension";
-import { TrieNode } from "./trieTypes";
+
 import { mergeCommonEndings } from "./mergeCommonEndings";
 import { mergeLeafNodes } from "./mergeLeafNodes";
 
 function emptyNodeAtPath(path: string): TrieNode {
   return { path, children: {}, value: "", keys: [] };
+}
+
+export interface TrieNode {
+  path: string;
+  value: string;
+  children: Record<string, TrieNode>;
+  keys: string[];
 }
 
 export class Trie {

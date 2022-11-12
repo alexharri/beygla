@@ -1,4 +1,4 @@
-import { TrieNode } from "./trieTypes";
+import { TrieNode } from "./Trie";
 
 export function serializeTrie(trie: TrieNode): string {
   function serializeLeaf(node: TrieNode, last: boolean): string {

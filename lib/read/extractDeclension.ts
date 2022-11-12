@@ -1,4 +1,4 @@
-import { CompressedTrie } from "../compress/trie/trieTypes";
+import { CompressedTrie } from "../common/types";
 
 export function extractDeclension(
   trie: CompressedTrie,

@@ -1,8 +1,8 @@
 // This file constitutes the public API for this library
 
-import { deserializeTrie } from "./deserialize";
-import { extractDeclension } from "./extractDeclension";
-import serializedInput from "./serializedInput";
+import { deserializeTrie } from "./read/deserialize";
+import { extractDeclension } from "./read/extractDeclension";
+import serializedInput from "./read/serializedInput";
 
 const trie = deserializeTrie(serializedInput);
 
