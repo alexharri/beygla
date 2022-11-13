@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "test": "jest",
+    "test:build": "TEST_BUILD=true jest beygla.spec.ts",
     "test:watch": "jest --watchAll",
     "test:ci": "jest --ci --coverage",
     "build": "ts-node -T ./scripts/build.ts",

@@ -1,6 +1,18 @@
-import { applyCase } from "./beygla";
+import { applyCase as _applyCase } from "./beygla";
 import serializedInput from "./read/serializedInput";
 import groupedNames from "../out/grouped-names.json";
+
+let applyCase = _applyCase;
+
+const testingBuild = process.env.TEST_BUILD === "true";
+if (testingBuild) {
+  // We specifically check for the precense of 'Testing built module.' in
+  // the 'test-build' script to make sure that we actually ran the test
+  // on the build output.
+  console.log("Testing built module.");
+
+  applyCase = require("../dist/beygla.esm.js").applyCase;
+}
 
 jest.mock("./read/serializedInput", () => {
   const fs = require("fs");
