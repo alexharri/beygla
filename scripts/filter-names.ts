@@ -6,7 +6,7 @@ import fs from "fs/promises";
 import fsSync from "fs";
 import path from "path";
 import { getNames } from "../lib/preprocess/data/getNames";
-import { gzipFile } from "../lib/preprocess/utils/gzip";
+import { logWriteAndSize } from "../lib/preprocess/utils/gzip";
 
 const nameCasesCsvFilePath = path.resolve(__dirname, "../out/name-cases.csv");
 const wordCasesCsvFilePath = path.resolve(__dirname, "../data/word-cases.csv");
@@ -37,7 +37,7 @@ async function main() {
 
   console.log(`Filtered ${nInputLines} entries into ${nOutputLines} entries.`);
 
-  await gzipFile(nameCasesCsvFilePath);
+  await logWriteAndSize(nameCasesCsvFilePath);
 }
 
 main();

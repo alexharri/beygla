@@ -1,16 +1,17 @@
 import path from "path";
-import fs from "fs";
+import fs from "fs/promises";
 import { getNames } from "../lib/preprocess/data/getNames";
 import { isDefiniteArticle } from "../lib/preprocess/format/article";
 import { isCasePlural } from "../lib/preprocess/format/case";
 import { formatName, getRawName } from "../lib/preprocess/format/name";
 import { Case, DeclinedName } from "../lib/compress/Types";
-import { readGzippedFileLines } from "../lib/preprocess/utils/gzip";
+import { writeAndLogSize } from "../lib/preprocess/utils/gzip";
 
-const nameCasesFilePath = path.resolve(__dirname, "../out/name-cases.csv.gz");
+const nameCasesFilePath = path.resolve(__dirname, "../out/name-cases.csv");
 
 async function main() {
-  const lines = await readGzippedFileLines(nameCasesFilePath);
+  const fileContent = await fs.readFile(nameCasesFilePath, "utf-8");
+  const lines = fileContent.split("\n");
 
   const names = getNames();
   const nameSet = new Set(names);
@@ -70,7 +71,7 @@ async function main() {
   }
 
   const filePath = path.resolve(__dirname, "../out/grouped-names.json");
-  fs.writeFileSync(filePath, JSON.stringify(out, null, 2), "utf-8");
+  writeAndLogSize(filePath, JSON.stringify(out, null, 2));
 }
 
 main();

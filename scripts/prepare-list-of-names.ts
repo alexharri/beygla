@@ -1,5 +1,6 @@
 import path from "path";
 import fs from "fs";
+import { writeAndLogSize } from "../lib/preprocess/utils/gzip";
 
 const csvFilePath = path.resolve(__dirname, "../data/icelandic-names.csv");
 const jsonFilePath = path.resolve(__dirname, "../out/icelandic-names.json");
@@ -49,7 +50,7 @@ function main() {
   // Ensure that the 'out/' dir exists.
   fs.mkdirSync(path.resolve(__dirname, "../out/"), { recursive: true });
 
-  fs.writeFileSync(jsonFilePath, JSON.stringify(names, null, 2), "utf-8");
+  writeAndLogSize(jsonFilePath, JSON.stringify(names, null, 2));
 }
 
 main();

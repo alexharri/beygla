@@ -11,7 +11,10 @@ if (args) {
 
 const start = Date.now();
 
-execSync(`npx ts-node -T ./scripts/${script} ${args}`, { stdio: "inherit" });
+execSync(
+  `NODE_OPTIONS='--unhandled-rejections=strict' npx ts-node -T ./scripts/${script} ${args}`,
+  { stdio: "inherit" }
+);
 
 const timeMs = Date.now() - start;
 console.log(`\nRan script '${script}' in ${timeMs}ms`);

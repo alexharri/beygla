@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import { CompressedTrie } from "../lib/common/types";
 import { TrieNode } from "../lib/compress/trie/Trie";
+import { writeAndLogSize } from "../lib/preprocess/utils/gzip";
 
 function serializeSankeyFull() {
   const trie: TrieNode = JSON.parse(
@@ -87,14 +88,12 @@ function serializeSankeyMinimal() {
   return out;
 }
 
-fs.writeFileSync(
+writeAndLogSize(
   path.resolve(__dirname, "../out/sankey-full.txt"),
-  serializeSankeyFull(),
-  "utf-8"
+  serializeSankeyFull()
 );
 
-fs.writeFileSync(
+writeAndLogSize(
   path.resolve(__dirname, "../out/sankey-deserialized.txt"),
-  serializeSankeyMinimal(),
-  "utf-8"
+  serializeSankeyMinimal()
 );

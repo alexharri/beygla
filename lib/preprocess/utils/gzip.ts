@@ -1,21 +1,7 @@
 import fs from "fs";
 import zlib from "zlib";
-import readline from "readline";
-
-export async function readGzippedFileLines(filePath: string) {
-  const lines: string[] = [];
-
-  const readInterface = readline.createInterface({
-    input: fs.createReadStream(filePath).pipe(zlib.createGunzip()),
-    crlfDelay: Infinity,
-  });
-
-  for await (const line of readInterface) {
-    lines.push(line);
-  }
-
-  return lines;
-}
+import { filesize } from "filesize";
+import gzipSize from "gzip-size";
 
 export async function gzipFile(filePath: string) {
   const stream = fs.createReadStream(filePath);
@@ -35,4 +21,28 @@ export async function gzipFile(filePath: string) {
         `Compressed '${fileName}.gz' to ${percentage}% of the original size`
       );
     });
+}
+
+export function logWriteAndSize(filePath: string) {
+  const content = fs.readFileSync(filePath);
+
+  const baseLength = content.length;
+  const gzipLength = gzipSize.sync(content);
+
+  const baseSize = filesize(baseLength);
+  const gzippedSize = filesize(gzipLength);
+
+  const percentage = ((gzipLength / baseLength) * 100).toFixed(2);
+
+  const parts = filePath.split("/");
+  const fileName = parts[parts.length - 1];
+
+  console.log(
+    `Created file '${fileName}'\n\tSize:\t\t${baseSize}\n\tGzip size:\t${gzippedSize} (${percentage}%)`
+  );
+}
+
+export function writeAndLogSize(filePath: string, content: string) {
+  fs.writeFileSync(filePath, content, "utf-8");
+  logWriteAndSize(filePath);
 }
