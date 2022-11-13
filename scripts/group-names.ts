@@ -70,8 +70,28 @@ async function main() {
     out.push([nf.name, þf.name, þgf.name, ef.name]);
   }
 
-  const filePath = path.resolve(__dirname, "../out/grouped-names.json");
-  writeAndLogSize(filePath, JSON.stringify(out, null, 2));
+  const excludedNames = [...nameSet].filter((name) => !groups[name]);
+
+  const ratio = excludedNames.length / names.length;
+  const percentage = (ratio * 100).toFixed(2) + "%";
+
+  console.log(
+    `${excludedNames.length} of ${names.length} names (${percentage}) in 'name-cases.csv' are not present in 'words.csv' and are not included.\n`
+  );
+
+  const groupedNamesfilePath = path.resolve(
+    __dirname,
+    "../out/grouped-names.json"
+  );
+  const excludedNamesfilePath = path.resolve(
+    __dirname,
+    "../out/excluded-names.json"
+  );
+  writeAndLogSize(groupedNamesfilePath, JSON.stringify(out, null, 2));
+  writeAndLogSize(
+    excludedNamesfilePath,
+    JSON.stringify(excludedNames, null, 2)
+  );
 }
 
 main();
