@@ -113,7 +113,7 @@ Encoding these rules, and their exceptions, is hard and can take up a lot of spa
 
 Well, beygla encodes these rules in just **5 kilobytes** gzipped.[^*]
 
-[^*]: Declension rules are encoded using cases for 3647 out of 4505 legal Icelandic names (81%). The data for the cases is from [bin.arnastofnun.is](https://bin.arnastofnun.is/gogn/).
+[^*]: Declension rules are encoded using cases for 3647 out of 4505 Icelandic names (81%). The data for the cases is from [bin.arnastofnun.is](https://bin.arnastofnun.is/gogn/).
 
 <h2 id="Usage">
 Usage
