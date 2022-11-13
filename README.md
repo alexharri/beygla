@@ -31,7 +31,7 @@ applyCase("þgf", "Helga Fríða Smáradóttir");
 
 ---
 
-## Overview
+# Overview
 
 - [Why does beygla exist?](#Why_does_beygla_exist)
 - [Usage](#Usage)
@@ -76,13 +76,13 @@ Since usernames are stored in the nominative case, we can solve this by **rewrit
 
 > _Guðmundur hefur fengið skjalið sent_
 
-But we've now changed the message from:
+But we've now changed the message entirely!
 
 > Before: _The document has been sent to Guðmundur_
 >
 > After: _Guðmundur has received the document_
 
-But these sorts of changes can change the tone of voice, and meaning, of the message. This makes the job of content writers significantly harder.
+When writing Icelandic content I frequently need to do these sorts of rewrites. However, they often change the tone of voice, and meaning, of the message. This makes my job as a content writer harder (and frustrating).
 
 The best way to solve this would be to apply the correct case **to the name** instead of the message. However, Icelandic name declension has lots of rules, with **lots** of exceptions.
 
