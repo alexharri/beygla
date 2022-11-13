@@ -60,31 +60,46 @@ The different cases are used depending on the context in which the name is used.
 - _„Hvað finnst Guðmundi um breytingarnar?“_
 - _„Ég kem þessu áleiðis til Guðmundar.“_
 
-Usernames in Icelandic are typically stored in the nominative case (nefnifall). This creates a challenge when writing text referring to a user's name.
+Icelandic usernames stored in the nominative case (nefnifall). This can pose a challenge when using the name in text.
 
 > _The document has been sent to Guðmundur_
 
-This message can be translated to Icelandic as:
+Translated to Icelandic, this reads:
 
 > _Skjalið hefur verið sent á Guðmundur_
 
-But to an Icelandic reader, this is jarring because the nominative case is used instead of the accusative case. This message should read:
+To an Icelander, this is jarring. The name appears in the nominative case „Guðmundur“, but it should be in the accusative case _„Guðmund“_.
 
-> _Skjalið hefur verið sent á Guðmund_
-
-Since usernames are stored in the nominative case, we can solve this by **rewriting the entire message** to use the nominative case.
+Rewritten to use the nominative case, we get:
 
 > _Guðmundur hefur fengið skjalið sent_
 
 But we've now changed the message entirely!
 
-> Before: _The document has been sent to Guðmundur_
->
-> After: _Guðmundur has received the document_
+<table>
+<tr><td>Before</td><td>After</td></tr>
+<tr>
+<td>
 
-When writing Icelandic content I frequently need to do these sorts of rewrites. However, they often change the tone of voice, and meaning, of the message. This makes my job as a content writer harder (and frustrating).
+> _The document has been sent to Guðmundur_
 
-The best way to solve this would be to apply the correct case **to the name** instead of the message. However, Icelandic name declension has lots of rules, with **lots** of exceptions.
+</td>
+<td>
+
+> _Guðmundur has received the document_
+
+</td>
+</tr>
+</table>
+
+This forces an Icelandic content writer to degrade the user experience by either:
+
+ 1. using language that is not as natural, or
+ 2. reducing specificity by omitting the name entirely.
+
+By transforming names to the correct case, we would remove this problem entirely.
+
+Unfortunately, Icelandic name declension has lots of rules, with **lots** of exceptions.
 
 ```
 # Left is nominative case, right is accusative case
