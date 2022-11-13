@@ -67,11 +67,6 @@ function applyCaseToName(caseStr: Case, name: string) {
   return name;
 }
 
-function applyCaseToString(caseStr: Case, name: string) {
-  const names = name.split(/\s+/).filter(Boolean);
-  return names.map((name) => applyCaseToName(caseStr, name)).join(" ");
-}
-
 /**
  * Applies a case to a source name provided in the nominative
  * case (nefnifall).
@@ -99,5 +94,6 @@ function applyCaseToString(caseStr: Case, name: string) {
  * @param caseStr - The case to apply to the name to, e.g. `þf`
  */
 export function applyCase(caseStr: Case, name: string): string {
-  return applyCaseToString(caseStr, name);
+  const names = name.split(/\s+/).filter(Boolean);
+  return names.map((name) => applyCaseToName(caseStr, name)).join(" ");
 }
