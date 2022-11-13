@@ -95,7 +95,7 @@ This forces an Icelandic content writer to degrade the user experience by either
  * using language that is not as natural, or
  * reducing specificity by omitting the name entirely.
 
-By transforming names to the correct case, we would remove this problem entirely.
+By being able to decline (transform) names to the correct case, we would remove this problem entirely.
 
 Unfortunately, Icelandic name declension has lots of rules, with **lots** of exceptions.
 
