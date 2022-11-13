@@ -90,6 +90,14 @@ function applyCaseToName(caseStr: Case, name: string) {
  * - Dative `dat` (þágufall `þgf` in Icelandic)
  * - Genitive `gen` (eignarfall `ef` in Icelandic)
  *
+ * Note that superfluous whitespace is not retained:
+ *
+ * @example
+ * ```tsx
+ * applyCase("þf", "  \n  Hildigerður  Oddný\tPatreksdóttir  \n\n");
+ * //=> "Hildigerði Oddnýju Patreksdóttur"
+ * ```
+ *
  * @param name - An Icelandic name in the nominative case (nefnifall)
  * @param caseStr - The case to apply to the name to, e.g. `þf`
  */
