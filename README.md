@@ -60,7 +60,7 @@ The different cases are used depending on the context in which the name is used.
 - _„Hvað finnst Guðmundi um breytingarnar?“_
 - _„Ég kem þessu áleiðis til Guðmundar.“_
 
-Icelandic usernames are stored in the nominative case (nefnifall). This can pose a challenge when using the name in text.
+Icelandic usernames are stored in the nominative case (nefnifall). This can pose a challenge when using the name in a sentence.
 
 > _The document has been sent to Guðmundur_
 
@@ -92,8 +92,8 @@ But we've now changed the message entirely!
 
 This forces an Icelandic content writer to degrade the user experience by either:
 
- 1. using language that is not as natural, or
- 2. reducing specificity by omitting the name entirely.
+ * using language that is not as natural, or
+ * reducing specificity by omitting the name entirely.
 
 By transforming names to the correct case, we would remove this problem entirely.
 
