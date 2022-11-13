@@ -85,4 +85,8 @@ Alex → Alex
 Bjarnfreður → Bjarnfreð
 ```
 
-There are over 5000 Icelandic names, which correspond to roughly 20K cases.
+Encoding these rules, and their exceptions, is hard and can take up a lot of space. Developers don't want to add hundreds of kilobytes to the bundle size, just to apply cases to names.
+
+Well, beygla encodes these rules[^*] and does it in **5 kilobytes** (gzipped).
+
+[^*]: Beygla encodes declension rules for 3647 out of 4505 legal Icelandic names (81%). Declension rules are based on data from [bin.arnastofnun.is](https://bin.arnastofnun.is/gogn/).
