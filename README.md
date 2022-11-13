@@ -90,3 +90,42 @@ Encoding these rules, and their exceptions, is hard and can take up a lot of spa
 Well, beygla encodes these rules and does it in **5 kilobytes** (gzipped).[^*]
 
 [^*]: Beygla encodes declension rules for 3647 out of 4505 legal Icelandic names (81%). Declension rules are based on data from [bin.arnastofnun.is](https://bin.arnastofnun.is/gogn/).
+
+
+## Usage
+
+Install beygla as an npm package:
+
+```bash
+npm i -S beygla
+```
+
+Beygla exports a single function named `applyCase`.
+
+```tsx
+import { applyCase } from "beygla";
+
+applyCase("ef", "Jóhann");
+//=> "Jóhannesar"
+
+applyCase("þgf", "Helga Dís Smáradóttir");
+//=> "Helgu Dís Smáradóttur"
+```
+
+`applyCase` accepts two parameters: a case and a name (in the nominative case[^nom]). The return value is a string with the name declined to the provided case.
+
+[^nom]: If the name provided is not in the nominative case, `applyCase` is likely to yield an unexpected value.
+
+
+### Cases
+
+The following cases may be provided as the first argument to `applyCase`:
+
+| Case (English) | Case (Icelandic) | Value (English) | Value (Icelandic) |
+|---|---|---|---|
+| Nominative | Nefnifall | `"nom"` | `"nf"` |
+| Accusative | Þolfall | `"acc"` | `"þf"` |
+| Dative | Þágufall | `"dat"` | `"þgf"` |
+| Genitive | Eignarfall | `"gen"` | `"ef"` |
+
+If a case not in the table above is provided, `"nf"` is used as a fallback (i.e. nothing is done).
