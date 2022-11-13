@@ -12,20 +12,18 @@ const nameCasesCsvFilePath = path.resolve(__dirname, "../out/name-cases.csv");
 const wordCasesCsvFilePath = path.resolve(__dirname, "../data/word-cases.csv");
 
 async function main() {
-  const start = Date.now();
-
   await fs.writeFile(nameCasesCsvFilePath, "", "utf-8");
   const inputFile = await fs.open(wordCasesCsvFilePath);
 
   const outStream = fsSync.createWriteStream(nameCasesCsvFilePath, "utf-8");
 
-  let numerOfInputLines = 0;
-  let numberOfNames = 0;
+  let nInputLines = 0;
+  let nOutputLines = 0;
 
   const nameSet = new Set(getNames());
 
   for await (const line of inputFile.readLines()) {
-    numerOfInputLines++;
+    nInputLines++;
 
     const name = line.split(";")[0];
 
@@ -34,14 +32,10 @@ async function main() {
     }
 
     outStream.write(line + "\n");
-    numberOfNames++;
+    nOutputLines++;
   }
 
-  const timeMs = Date.now() - start;
-
-  console.log(
-    `Processed ${numerOfInputLines} words into ${numberOfNames} names in ${timeMs} ms`
-  );
+  console.log(`Filtered ${nInputLines} entries into ${nOutputLines} entries.`);
 
   await gzipFile(nameCasesCsvFilePath);
 }

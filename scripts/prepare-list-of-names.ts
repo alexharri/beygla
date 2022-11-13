@@ -46,6 +46,9 @@ function main() {
     }
   }
 
+  // Ensure that the 'out/' dir exists.
+  fs.mkdirSync(path.resolve(__dirname, "../out/"), { recursive: true });
+
   fs.writeFileSync(jsonFilePath, JSON.stringify(names, null, 2), "utf-8");
 }
 

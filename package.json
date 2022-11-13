@@ -7,12 +7,8 @@
     "test:watch": "jest --watchAll",
     "test:ci": "jest --ci --coverage",
     "build": "ts-node -T ./scripts/build.ts",
-    "download-words": "ts-node -T ./scripts/download-words.ts",
-    "prepare-list-of-names": "ts-node -T ./scripts/prepare-list-of-names.ts",
-    "filter-names": "ts-node -T ./scripts/filter-names.ts",
-    "process-names": "ts-node -T ./scripts/process-names.ts",
-    "group-names": "ts-node -T ./scripts/group-names.ts",
-    "sankey-diagram": "ts-node -T ./scripts/sankey-diagram.ts"
+    "script": "ts-node -T ./scripts/run-script.ts",
+    "pipeline": "npm run script -- pipeline"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.20.2",
