@@ -7,10 +7,10 @@ import { formatName, getRawName } from "../lib/preprocess/format/name";
 import { Case, DeclinedName } from "../lib/compress/Types";
 import { readGzippedFileLines } from "../lib/preprocess/utils/gzip";
 
-const namesFilePath = path.resolve(__dirname, "../out/names.csv.gz");
+const nameCasesFilePath = path.resolve(__dirname, "../out/name-cases.csv.gz");
 
 async function main() {
-  const lines = await readGzippedFileLines(namesFilePath);
+  const lines = await readGzippedFileLines(nameCasesFilePath);
 
   const names = getNames();
   const nameSet = new Set(names);

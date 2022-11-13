@@ -1,8 +1,8 @@
 import path from "path";
 import fs from "fs";
 
-const csvFilePath = path.resolve(__dirname, "../data/names.csv");
-const jsonFilePath = path.resolve(__dirname, "../out/names.json");
+const csvFilePath = path.resolve(__dirname, "../data/icelandic-names.csv");
+const jsonFilePath = path.resolve(__dirname, "../out/icelandic-names.json");
 
 function main() {
   const fileContent = fs.readFileSync(csvFilePath, "utf-8");
@@ -21,7 +21,7 @@ function main() {
 
     // The following names contain a decision of 'NULL'.
     //
-    // All of these names are not present in 'words.csv' so we treating
+    // All of these names are not present in 'word-cases.csv' so we treating
     // them as if they were rejected.
     switch (id) {
       case "4692": // Emelíta

@@ -4,7 +4,7 @@ import yauzl from "yauzl";
 import { execSync } from "child_process";
 
 const zipFilePath = path.resolve(__dirname, "../data/words.zip");
-const csvFilePath = path.resolve(__dirname, "../data/words.csv");
+const csvFilePath = path.resolve(__dirname, "../data/word-cases.csv");
 
 console.log(`Downloading file\n`);
 
@@ -44,7 +44,7 @@ const unzip = async () => {
 
   fs.rmSync(zipFilePath);
 
-  console.log(`Successfully unzipped words.csv`);
+  console.log(`Successfully unzipped 'word-cases.csv'`);
 };
 
 unzip();

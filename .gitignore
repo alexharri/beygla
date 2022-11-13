@@ -24,4 +24,4 @@ yarn-error.log*
 # custom
 /out
 /dist
-/data/words.csv
+/data/word-cases.csv
