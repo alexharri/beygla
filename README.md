@@ -31,7 +31,18 @@ applyCase("þgf", "Helga Fríða Smáradóttir");
 
 ---
 
-## Why does beygla exist?
+## Overview
+
+- [Why does beygla exist?](#Why_does_beygla_exist)
+- [Usage](#Usage)
+  - [Cases](#Cases)
+  - [Whitespace](#Whitespace)
+
+---
+
+<h2 id="Why_does_beygla_exist">
+Why does beygla exist?
+</h2>
 
 Icelandic names have four cases:
 
@@ -44,32 +55,32 @@ Guðmundar   →  Genitive case (eignarfall)
 
 The different cases are used depending on the context in which the name is used.
 
-- *„Hann Guðmundur hefur bætt sig mikið.“*
-- *„Illa er farið með góðann Guðmund.“*
-- *„Hvað finnst Guðmundi um breytingarnar?“*
-- *„Ég kem þessu áleiðis til Guðmundar.“*
+- _„Hann Guðmundur hefur bætt sig mikið.“_
+- _„Illa er farið með góðann Guðmund.“_
+- _„Hvað finnst Guðmundi um breytingarnar?“_
+- _„Ég kem þessu áleiðis til Guðmundar.“_
 
 Usernames in Icelandic are typically stored in the nominative case (nefnifall). This creates a challenge when writing text referring to a user's name.
 
-> *The document has been sent to Guðmundur*
+> _The document has been sent to Guðmundur_
 
 This message can be translated to Icelandic as:
 
-> *Skjalið hefur verið sent á Guðmundur*
+> _Skjalið hefur verið sent á Guðmundur_
 
 But to an Icelandic reader, this is jarring because the nominative case is used instead of the accusative case. This message should read:
 
-> *Skjalið hefur verið sent á Guðmund*
+> _Skjalið hefur verið sent á Guðmund_
 
 Since usernames are stored in the nominative case, we can solve this by **rewriting the entire message** to use the nominative case.
 
-> *Guðmundur hefur fengið skjalið sent*
+> _Guðmundur hefur fengið skjalið sent_
 
 But we've now changed the message from:
 
-> Before: *The document has been sent to Guðmundur*
+> Before: _The document has been sent to Guðmundur_
 >
-> After: *Guðmundur has received the document*
+> After: _Guðmundur has received the document_
 
 But these sorts of changes can change the tone of voice, and meaning, of the message. This makes the job of content writers significantly harder.
 
@@ -91,8 +102,9 @@ Well, beygla encodes these rules and does it in **5 kilobytes** (gzipped).[^*]
 
 [^*]: Beygla encodes declension rules for 3647 out of 4505 legal Icelandic names (81%). Declension rules are based on data from [bin.arnastofnun.is](https://bin.arnastofnun.is/gogn/).
 
-
-## Usage
+<h2 id="Usage">
+Usage
+</h2>
 
 Install beygla as an npm package:
 
@@ -116,16 +128,28 @@ applyCase("þgf", "Helga Dís Smáradóttir");
 
 [^nom]: If the name provided is not in the nominative case, `applyCase` is likely to yield an unexpected value.
 
-
-### Cases
+<h3 id="Cases">
+Cases
+</h3>
 
 The following cases may be provided as the first argument to `applyCase`:
 
-| Case (English) | Case (Icelandic) | Value (English) | Value (Icelandic) |
-|---|---|---|---|
-| Nominative | Nefnifall | `"nom"` | `"nf"` |
-| Accusative | Þolfall | `"acc"` | `"þf"` |
-| Dative | Þágufall | `"dat"` | `"þgf"` |
-| Genitive | Eignarfall | `"gen"` | `"ef"` |
+| Case (English) |  Case (Icelandic) | Value (English) | Value (Icelandic) |
+| -------------- | ----------------- | --------------- | ----------------- |
+| Nominative     | Nefnifall         | `"nom"`         | `"nf"`            |
+| Accusative     | Þolfall           | `"acc"`         | `"þf"`            |
+| Dative         | Þágufall          | `"dat"`         | `"þgf"`           |
+| Genitive       | Eignarfall        | `"gen"`         | `"ef"`            |
 
 If a case not in the table above is provided, `"nf"` is used as a fallback (i.e. nothing is done).
+
+<h3 id="Whitespace">
+Whitespace
+</h2>
+
+If the name includes superfluous whitespace, `applyCase` removes it.
+
+```tsx
+applyCase("þgf", "  \n  Helga  Dís\tSmáradóttir  \n\n");
+//=> "Helgu Dís Smáradóttur"
+```
