@@ -38,5 +38,9 @@
     "name": "Alex Harri Jónsson",
     "email": "alexharri2919@gmail.com",
     "url": "https://alexharri.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexharri/beygla"
   }
 }
