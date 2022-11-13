@@ -44,26 +44,26 @@ Guðmundar   →  Genitive case (eignarfall)
 
 The different cases are used depending on the context in which the name is used.
 
-- „Hann **Guðmundur** hefur bætt sig mikið.“
-- „Illa er farið með góðann **Guðmund**.“
-- „Hvað finnst **Guðmundi** um breytingarnar?“
-- „Ég kem þessu áleiðis til **Guðmundar**.“
+- *„Hann Guðmundur hefur bætt sig mikið.“*
+- *„Illa er farið með góðann Guðmund.“*
+- *„Hvað finnst Guðmundi um breytingarnar?“*
+- *„Ég kem þessu áleiðis til Guðmundar.“*
 
-Usernames in Icelandic are typically stored in the nominative case (nefnifall). This creates a challenge when writing text referring to a user's name. A simple message like:
+Usernames in Icelandic are typically stored in the nominative case (nefnifall). This creates a challenge when writing text referring to a user's name.
 
-> The document has been sent to Guðmundur
+> *The document has been sent to Guðmundur*
 
-Would be translated to:
+This message can be translated to Icelandic as:
 
-> Skjalið hefur verið sent á Guðmundur
+> *Skjalið hefur verið sent á Guðmundur*
 
 But to an Icelandic reader, this is jarring because the nominative case is used instead of the accusative case. This message should read:
 
-> Skjalið hefur verið sent á *Guðmund*
+> *Skjalið hefur verið sent á Guðmund*
 
 Since usernames are stored in the nominative case, we can solve this by **rewriting the entire message** to use the nominative case.
 
-> Guðmundur hefur fengið skjalið sent
+> *Guðmundur hefur fengið skjalið sent*
 
 But we've now changed the message from:
 
