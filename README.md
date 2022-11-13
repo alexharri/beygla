@@ -81,13 +81,11 @@ But we've now changed the message entirely!
 <tr>
 <td>
 
-_The document has been sent to Guðmundur_
-
+> _The document has been sent to Guðmundur_
 </td>
 <td>
 
-_Guðmundur has received the document_
-
+> _Guðmundur has received the document_
 </td>
 </tr>
 </table>
