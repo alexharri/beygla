@@ -1,5 +1,5 @@
 <h1 align="center">
-  <code>beygla</code>
+  Beygla
 </h1>
 
 <p align="center">
@@ -21,8 +21,6 @@
   </a>
 </p>
 
-<div align="center">
-
 ```tsx
 applyCase("ef", "Jóhann");
 //=> "Jóhannesar"
@@ -30,4 +28,61 @@ applyCase("ef", "Jóhann");
 applyCase("þgf", "Helga Fríða Smáradóttir");
 //=> "Helgu Fríðu Smáradóttur"
 ```
-</div>
+
+---
+
+## Why does beygla exist?
+
+Icelandic names have four cases:
+
+```
+Guðmundur   →  Nominative case (nefnifall)
+Guðmund     →  Accusative case (þolfall)
+Guðmundi    →  Dative case (þágufall)
+Guðmundar   →  Genitive case (eignarfall)
+```
+
+The different cases are used depending on the context in which the name is used.
+
+- „Hann **Guðmundur** hefur bætt sig mikið.“
+- „Illa er farið með góðann **Guðmund**.“
+- „Hvað finnst **Guðmundi** um breytingarnar?“
+- „Ég kem þessu áleiðis til **Guðmundar**.“
+
+Usernames in Icelandic are typically stored in the nominative case (nefnifall). This creates a challenge when writing text referring to a user's name. A simple message like:
+
+> The document has been sent to Guðmundur
+
+Would be translated to:
+
+> Skjalið hefur verið sent á Guðmundur
+
+But to an Icelandic reader, this is jarring because the nominative case is used instead of the accusative case. This message should read:
+
+> Skjalið hefur verið sent á *Guðmund*
+
+Since usernames are stored in the nominative case, we can solve this by **rewriting the entire message** to use the nominative case.
+
+> Guðmundur hefur fengið skjalið sent
+
+But we've now changed the message from:
+
+> Before: *The document has been sent to Guðmundur*
+>
+> After: *Guðmundur has received the document*
+
+But these sorts of changes can change the tone of voice, and meaning, of the message. This makes the job of content writers significantly harder.
+
+The best way to solve this would be to apply the correct case **to the name** instead of the message. However, Icelandic name declension has lots of rules, with **lots** of exceptions.
+
+```
+# Left is nominative case, right is accusative case
+
+Gauti → Gauta
+Jóhanna → Jóhönnu
+Snæfríður → Snæfríði
+Alex → Alex
+Bjarnfreður → Bjarnfreð
+```
+
+There are over 5000 Icelandic names, which correspond to roughly 20K cases.
