@@ -4,7 +4,7 @@ import { getNames } from "../lib/preprocess/data/getNames";
 import { isDefiniteArticle } from "../lib/preprocess/format/article";
 import { isCasePlural } from "../lib/preprocess/format/case";
 import { formatName, getRawName } from "../lib/preprocess/format/name";
-import { Case, DeclinedName } from "../lib/compress/Types";
+import { Case, DeclinedName } from "../lib/compress/types";
 import { writeAndLogSize } from "../lib/preprocess/utils/gzip";
 
 const nameCasesFilePath = path.resolve(__dirname, "../out/name-cases.csv");
