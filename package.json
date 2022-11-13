@@ -9,6 +9,7 @@
     "build": "ts-node -T ./scripts/build.ts",
     "script": "ts-node -T ./scripts/run-script.ts",
     "pipeline": "npm run script -- pipeline",
+    "release": "cd dist && semantic-release",
     "release:dry-run": "cd dist && semantic-release --dry-run"
   },
   "devDependencies": {

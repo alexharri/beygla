@@ -38,4 +38,4 @@ jobs:
         run: npm run script -- test-build
 
       - name: Release
-        run: npm run release:dry-run
+        run: npm run release
