@@ -118,6 +118,6 @@ export class Trie {
   }
 
   toJSON() {
-    return JSON.stringify(this.getTrie());
+    return this.getTrie();
   }
 }

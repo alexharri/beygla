@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
-import { CompressedTrie, TrieNode } from "../lib/compress/trie/trieTypes";
+import { CompressedTrie } from "../lib/common/types";
+import { TrieNode } from "../lib/compress/trie/Trie";
 
 function serializeSankeyFull() {
   const trie: TrieNode = JSON.parse(
