@@ -90,7 +90,7 @@ But we've now changed the message entirely!
 </tr>
 </table>
 
-This forces an Icelandic content writer to degrade the user experience by either:
+This forces an Icelandic content writer to degrade the user experience by either
 
  * using language that is not as natural, or
  * reducing specificity by omitting the name entirely.
