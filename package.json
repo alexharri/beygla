@@ -42,5 +42,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/alexharri/beygla"
-  }
+  },
+  "contributors": [
+    "Alex Harri Jónsson <alexharri2919@gmail.com> (https://alexharri.com)"
+  ]
 }
