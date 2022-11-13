@@ -126,7 +126,7 @@ applyCase("þgf", "Helga Dís Smáradóttir");
 
 `applyCase` accepts two parameters: a case and a name (in the nominative case[^nom]). The return value is a string with the name declined to the provided case.
 
-[^nom]: If the name provided is not in the nominative case, `applyCase` is likely to yield an unexpected value.
+[^nom]: If the name provided is not in the nominative case, applyCase is likely to yield an unexpected value.
 
 <h3 id="Cases">
 Cases
