@@ -1,5 +1,8 @@
 {
   "name": "beygla",
+  "main": "beygla.js",
+  "module": "beygla.esm.js",
+  "types": "beygla.d.ts",
   "scripts": {
     "test": "jest",
     "test:build": "TEST_BUILD=true jest beygla.spec.ts",
