@@ -68,4 +68,52 @@ describe("applyCase", () => {
       expect(out).toEqual(expected);
     }
   });
+
+  it("applies a case to a full name", () => {
+    const sourceName = "Gunnar Sigurberg Brjánsson";
+
+    const out = applyCase("þgf", sourceName);
+
+    expect(out).toEqual("Gunnari Sigurbergi Brjánssyni");
+  });
+
+  it("strips whitespace in full names", () => {
+    const sourceName = "  \n  Hildigerður  Oddný\tPatreksdóttir  \n\n";
+
+    const out = applyCase("þf", sourceName);
+
+    expect(out).toEqual("Hildigerði Oddnýju Patreksdóttur");
+  });
+
+  it("applies a case to a first and middle name", () => {
+    const sourceName = "Þorleifur Sigþór";
+
+    const out = applyCase("ef", sourceName);
+
+    expect(out).toEqual("Þorleifs Sigþórs");
+  });
+
+  it("applies a case only the last name", () => {
+    const sourceName = "Ríkharðsdóttir";
+
+    const out = applyCase("ef", sourceName);
+
+    expect(out).toEqual("Ríkharðsdóttur");
+  });
+
+  it("applies a case to the first and last name", () => {
+    const sourceName = "Magnús Herleifsson";
+
+    const out = applyCase("þgf", sourceName);
+
+    expect(out).toEqual("Magnúsi Herleifssyni");
+  });
+
+  it("applies a case to only 'son' or 'dóttir'", () => {
+    const son = applyCase("þgf", "son");
+    const dottir = applyCase("þgf", "dóttir");
+
+    expect(son).toEqual("syni");
+    expect(dottir).toEqual("dóttur");
+  });
 });
