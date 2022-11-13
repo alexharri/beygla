@@ -1,12 +1,17 @@
-name: Pull Request
+name: Publish to npm
 
 on:
-  pull_request: {}
-  workflow_dispatch: {}
+  push:
+    branches:
+      - master
 
 jobs:
-  test:
+  release:
     runs-on: ubuntu-latest
+
+    env:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
     steps:
       - uses: actions/checkout@v2
