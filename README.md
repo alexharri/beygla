@@ -21,7 +21,7 @@
   </a>
 </p>
 
-<div style="max-width: 400px; margin: 0 auto;">
+<div align="center">
 
 ```tsx
 applyCase("ef", "Jóhann");
