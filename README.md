@@ -37,6 +37,9 @@ applyCase("þgf", "Helga Fríða Smáradóttir");
 - [Usage](#Usage)
   - [Cases](#Cases)
   - [Whitespace](#Whitespace)
+- [Correctness](#Correctness)
+  - [Passing a name in the wrong case](Passing_a_name_in_the_wrong_case)
+  - [What happens if beygla does not find a pattern?](What_happens_if_beygla_does_not_find_a_pattern)
 
 ---
 
@@ -168,3 +171,23 @@ If the name includes superfluous whitespace, `applyCase` removes it.
 applyCase("þgf", "  \n  Helga  Dís\tSmáradóttir  \n\n");
 //=> "Helgu Dís Smáradóttur"
 ```
+
+## Correctness
+
+Beygla will correctly apply the desired case to the input name in most cases.
+
+Most Icelandic names (81%), especially common ones, are present on [bin.arnastofnun.is](https://bin.arnastofnun.is/gogn/). Beygla is guaranteed to produce a correct result for those names.
+
+This does not mean that Beygla produces an incorrect result for the other 19% of names. Beygla finds patterns in name endings based on the data on [bin.arnastofnun.is](https://bin.arnastofnun.is/gogn/) and applies those patterns any name. This means that beygla will produce a correct result for most names, even if the name is not in the dataset on [bin.arnastofnun.is](https://bin.arnastofnun.is/gogn/).
+
+
+### Passing a name in the wrong case
+
+Beygla operates on the assumption that names provided to it are in the nominative case (nefnifall). If a name provided to beygla is in another case than nominative, an incorrect result is extremely likely.
+
+
+### What happens if beygla does not find a pattern?
+
+Given a name that has an ending that beygla does not recognize, it will not apply the case to the name.
+
+Do note that beygla attempts to apply the case to every name (first, last, and middle name) in a full name individually. This means that some names in a full name might have a case applied, and some not.
