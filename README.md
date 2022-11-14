@@ -172,7 +172,9 @@ applyCase("þgf", "  \n  Helga  Dís\tSmáradóttir  \n\n");
 //=> "Helgu Dís Smáradóttur"
 ```
 
-## Correctness
+<h2 id="Correctness">
+Correctness
+</h2>
 
 Beygla will correctly apply the desired case to the input name in most cases.
 
