@@ -180,7 +180,7 @@ Beygla will correctly apply the desired case to the input name in most cases.
 
 Most Icelandic names (81%), especially common ones, are present on [bin.arnastofnun.is](https://bin.arnastofnun.is/gogn/). Beygla is guaranteed to produce a correct result for those names.
 
-This does not mean that Beygla produces an incorrect result for the other 19% of names. Beygla finds patterns in name endings based on the data on [bin.arnastofnun.is](https://bin.arnastofnun.is/gogn/) and applies those patterns to any input name. This means that beygla will produce a correct result for most names, even if the name is not in the dataset on [bin.arnastofnun.is](https://bin.arnastofnun.is/gogn/).
+This does not mean that Beygla produces an incorrect result for the other 19% of names. Beygla finds patterns in name endings based on the data on [bin.arnastofnun.is](https://bin.arnastofnun.is/gogn/) and applies those patterns to any input name. This means that beygla will produce a correct result for most names, even if the name is not in the dataset from [bin.arnastofnun.is](https://bin.arnastofnun.is/gogn/).
 
 I tried randomly sampling 20 names from the list of legal Icelandic names not present in [bin.arnastofnun.is](https://bin.arnastofnun.is/gogn/):
 
