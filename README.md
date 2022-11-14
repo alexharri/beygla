@@ -191,12 +191,16 @@ Even though I happened to get no incorrect results, this is a very small sample.
 See [beygla.spec.ts](https://github.com/alexharri/beygla/blob/master/lib/beygla.spec.ts).
 
 
-### Passing a name in the wrong case
+<h3 id="Passing_a_name_in_the_wrong_case">
+Passing a name in the wrong case
+</h3>
 
 Beygla operates on the assumption that names provided to it are in the nominative case (nefnifall). If a name provided to beygla is in another case than nominative, an incorrect result is extremely likely.
 
 
-### What happens if beygla does not find a pattern?
+<h3 id="What_happens_if_beygla_does_not_find_a_pattern">
+What happens if beygla does not find a pattern?
+</h3>
 
 Given a name that has an ending that beygla does not recognize, it will not apply the case to the name.
 
