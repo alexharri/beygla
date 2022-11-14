@@ -119,7 +119,7 @@ describe("applyCase", () => {
     expect(dottir).toEqual("dóttur");
   });
 
-  it("finds correct(ish) declension for some unknown names", () => {
+  it("finds correct declension for some unknown names", () => {
     const tests: Array<[name: string, declension: string]> = [
       ["Sotti", "1;i,a,a,a"],
       ["Sófía", "1;a,u,u,u"],
