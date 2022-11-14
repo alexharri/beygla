@@ -1,8 +1,8 @@
-import { applyCase as _applyCase } from "./beygla";
+import * as _beygla from "./beygla";
 import serializedInput from "./read/serializedInput";
 import groupedNames from "../out/grouped-names.json";
 
-let applyCase = _applyCase;
+let beygla = _beygla;
 
 const testingBuild = process.env.TEST_BUILD === "true";
 if (testingBuild) {
@@ -11,8 +11,10 @@ if (testingBuild) {
   // on the build output.
   console.log("Testing built module.");
 
-  applyCase = require("../dist/beygla.esm.js").applyCase;
+  beygla = require("../dist/beygla.esm.js");
 }
+
+const { applyCase, getDeclensionForName } = beygla;
 
 jest.mock("./read/serializedInput", () => {
   const fs = require("fs");
@@ -115,5 +117,43 @@ describe("applyCase", () => {
 
     expect(son).toEqual("syni");
     expect(dottir).toEqual("dóttur");
+  });
+
+  it("finds correct(ish) declension for some unknown names", () => {
+    const tests: Array<[name: string, declension: string]> = [
+      ["Sotti", "1;i,a,a,a"],
+      ["Sófía", "1;a,u,u,u"],
+      ["Kórekur", "2;ur,,i,s"],
+      ["Olivia", "1;a,u,u,u"],
+      ["Caritas", "0;,,,ar"],
+      ["Hávarr", "1;r,,i,s"],
+      ["Ermenga", "1;a,u,u,u"],
+      ["Fannþór", "0;,,i,s"],
+      ["Ísbrá", "0;,,,r"],
+      ["Sófús", "0;,,i,ar"],
+      ["Kristólín", "0;,,,ar"],
+      ["Jasper", "0;,,,s"],
+      ["Rúnel", "0;,,i,s"],
+      ["Agok", "0;,,i,s"],
+    ];
+
+    for (const [name, declension] of tests) {
+      expect(getDeclensionForName(name)).toEqual(declension);
+    }
+  });
+
+  it("does not find a declension for some unknown names", () => {
+    const tests: string[] = [
+      "Emanuel",
+      "Frederik",
+      "Evan",
+      "Lennon",
+      "Artemis",
+      "Kaín",
+    ];
+
+    for (const name of tests) {
+      expect(getDeclensionForName(name)).toEqual(null);
+    }
   });
 });

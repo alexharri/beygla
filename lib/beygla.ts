@@ -105,3 +105,9 @@ export function applyCase(caseStr: Case, name: string): string {
   const names = name.split(/\s+/).filter(Boolean);
   return names.map((name) => applyCaseToName(caseStr, name)).join(" ");
 }
+
+export function getDeclensionForName(name: string): string | null {
+  if (name.split(/\s+/).length > 1)
+    throw new Error("Name must not include whitespace");
+  return extractDeclension(trie, name);
+}
