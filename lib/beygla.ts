@@ -50,6 +50,7 @@ function applyCaseToName(caseStr: Case, name: string) {
   for (const [ending, declension] of [
     ["son", "2;on,on,yni,onar"],
     ["dóttir", "2;ir,ur,ur,ur"],
+    ["bur", "0;,,i,s"],
   ]) {
     if (!name.endsWith(ending)) continue;
     if (namesThatEndWithSon.indexOf(name) !== -1) continue;

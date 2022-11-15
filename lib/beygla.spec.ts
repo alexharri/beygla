@@ -103,6 +103,23 @@ describe("applyCase", () => {
     expect(out).toEqual("Ríkharðsdóttur");
   });
 
+  it("applies cases to suffixes as expected", () => {
+    const cases = ["nf", "þf", "þgf", "ef"] as const;
+    const nameGroups = [
+      ["Jónsson", "Jónsson", "Jónssyni", "Jónssonar"],
+      ["Jónsdóttir", "Jónsdóttur", "Jónsdóttur", "Jónsdóttur"],
+      ["Jónsbur", "Jónsbur", "Jónsburi", "Jónsburs"],
+    ];
+
+    for (const group of nameGroups) {
+      const base = group[0];
+
+      for (const [i, caseStr] of cases.entries()) {
+        expect(applyCase(caseStr, base)).toEqual(group[i]);
+      }
+    }
+  });
+
   it("applies a case to the first and last name", () => {
     const sourceName = "Magnús Herleifsson";
 
