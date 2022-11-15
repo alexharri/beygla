@@ -50,6 +50,7 @@ function applyCaseToName(caseStr: Case, name: string) {
   for (const [ending, declension] of [
     ["son", "2;on,on,yni,onar"],
     ["dóttir", "2;ir,ur,ur,ur"],
+    ["bur", "0;,,i,s"],
   ]) {
     if (!name.endsWith(ending)) continue;
     if (namesThatEndWithSon.indexOf(name) !== -1) continue;
@@ -107,7 +108,6 @@ export function applyCase(caseStr: Case, name: string): string {
 }
 
 export function getDeclensionForName(name: string): string | null {
-  if (name.split(/\s+/).length > 1)
-    throw new Error("Name must not include whitespace");
+  if (name.split(/\s+/).length > 1) throw new Error("Name must not include whitespace");
   return extractDeclension(trie, name);
 }

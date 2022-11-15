@@ -103,6 +103,22 @@ describe("applyCase", () => {
     expect(out).toEqual("Ríkharðsdóttur");
   });
 
+  it("bends last name suffixes as expected", () => {
+    const nameGroups = [
+      ["Jónsson", "Jónsson", "Jónssyni", "Jónssonar"],
+      ["Jónsdóttir", "Jónsdóttur", "Jónsdóttur", "Jónsdóttur"],
+      ["Jónsbur", "Jónsbur", "Jónsburi", "Jónsburs"],
+    ];
+
+    for (const group of nameGroups) {
+      const base = group[0];
+
+      for (const [i, caseStr] of (["nf", "þf", "þgf", "ef"] as const).entries()) {
+        expect(applyCase(caseStr, base)).toEqual(group[i]);
+      }
+    }
+  });
+
   it("applies a case to the first and last name", () => {
     const sourceName = "Magnús Herleifsson";
 
@@ -143,14 +159,7 @@ describe("applyCase", () => {
   });
 
   it("does not find a declension for some unknown names", () => {
-    const tests: string[] = [
-      "Emanuel",
-      "Frederik",
-      "Evan",
-      "Lennon",
-      "Artemis",
-      "Kaín",
-    ];
+    const tests: string[] = ["Emanuel", "Frederik", "Evan", "Lennon", "Artemis", "Kaín"];
 
     for (const name of tests) {
       expect(getDeclensionForName(name)).toEqual(null);
