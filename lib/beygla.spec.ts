@@ -103,7 +103,7 @@ describe("applyCase", () => {
     expect(out).toEqual("Ríkharðsdóttur");
   });
 
-  it("bends last name suffixes as expected", () => {
+  it("applies cases to suffixes as expected", () => {
     const nameGroups = [
       ["Jónsson", "Jónsson", "Jónssyni", "Jónssonar"],
       ["Jónsdóttir", "Jónsdóttur", "Jónsdóttur", "Jónsdóttur"],
