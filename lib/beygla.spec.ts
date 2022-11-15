@@ -104,6 +104,7 @@ describe("applyCase", () => {
   });
 
   it("applies cases to suffixes as expected", () => {
+    const cases = ["nf", "þf", "þgf", "ef"] as const;
     const nameGroups = [
       ["Jónsson", "Jónsson", "Jónssyni", "Jónssonar"],
       ["Jónsdóttir", "Jónsdóttur", "Jónsdóttur", "Jónsdóttur"],
@@ -113,7 +114,7 @@ describe("applyCase", () => {
     for (const group of nameGroups) {
       const base = group[0];
 
-      for (const [i, caseStr] of (["nf", "þf", "þgf", "ef"] as const).entries()) {
+      for (const [i, caseStr] of cases.entries()) {
         expect(applyCase(caseStr, base)).toEqual(group[i]);
       }
     }
@@ -159,7 +160,14 @@ describe("applyCase", () => {
   });
 
   it("does not find a declension for some unknown names", () => {
-    const tests: string[] = ["Emanuel", "Frederik", "Evan", "Lennon", "Artemis", "Kaín"];
+    const tests: string[] = [
+      "Emanuel",
+      "Frederik",
+      "Evan",
+      "Lennon",
+      "Artemis",
+      "Kaín",
+    ];
 
     for (const name of tests) {
       expect(getDeclensionForName(name)).toEqual(null);

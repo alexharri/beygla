@@ -108,6 +108,7 @@ export function applyCase(caseStr: Case, name: string): string {
 }
 
 export function getDeclensionForName(name: string): string | null {
-  if (name.split(/\s+/).length > 1) throw new Error("Name must not include whitespace");
+  if (name.split(/\s+/).length > 1)
+    throw new Error("Name must not include whitespace");
   return extractDeclension(trie, name);
 }
