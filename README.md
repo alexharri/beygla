@@ -59,7 +59,7 @@ Guðmundar   →  Genitive case (eignarfall)
 The different cases are used depending on the context in which the name is used.
 
 - _„Hann Guðmundur hefur bætt sig mikið.“_
-- _„Illa er farið með góðann Guðmund.“_
+- _„Illa er farið með góðan Guðmund.“_
 - _„Hvað finnst Guðmundi um breytingarnar?“_
 - _„Ég kem þessu áleiðis til Guðmundar.“_
 
