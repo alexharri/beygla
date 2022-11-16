@@ -22,7 +22,7 @@
 </p>
 
 ```tsx
-applyCase("ef", "Jóhann");
+applyCase("ef", "Jóhannes");
 //=> "Jóhannesar"
 
 applyCase("þgf", "Helga Fríða Smáradóttir");
@@ -133,7 +133,7 @@ Beygla exports a single function named `applyCase`.
 ```tsx
 import { applyCase } from "beygla";
 
-applyCase("ef", "Jóhann");
+applyCase("ef", "Jóhannes");
 //=> "Jóhannesar"
 
 applyCase("þgf", "Helga Dís Smáradóttir");
