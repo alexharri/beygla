@@ -143,7 +143,7 @@ async function main() {
 
     let gender: string;
     const genders = Object.keys(byGender);
-    assert(genders.length > 0, "should have at least 1 genders");
+    assert(genders.length > 0, "should have at least 1 gender");
     if (genders.length > 1) {
       namesWithMultipleGenders.add(names[0].base);
       continue;
