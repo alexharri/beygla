@@ -176,4 +176,17 @@ describe("applyCase", () => {
       );
     }
   });
+
+  test("it uses the declensions for the person, not the company/organization", () => {
+    const tests = [
+      ["nf", "Eldey"],
+      ["þf", "Eldeyju"],
+      ["þgf", "Eldeyju"],
+      ["ef", "Eldeyjar"],
+    ] as const;
+
+    for (const [_case, name] of tests) {
+      expect(applyCase(_case, "Eldey")).toEqual(name);
+    }
+  });
 });
