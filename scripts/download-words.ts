@@ -9,7 +9,7 @@ const csvFilePath = path.resolve(__dirname, "../data/word-cases.csv");
 console.log(`Downloading file\n`);
 
 execSync(
-  `curl -o ${zipFilePath} https://bin.arnastofnun.is/django/api/nidurhal/?file=Storasnid_beygm.csv.zip`,
+  `curl -o ${zipFilePath} https://bin.arnastofnun.is/django/api/nidurhal/?file=KRISTINsnid.csv.zip`,
   { stdio: "inherit" }
 );
 
@@ -25,8 +25,8 @@ const unzip = async () => {
         return;
       }
       zipfile.on("entry", (entry) => {
-        if (entry.fileName === "Storasnid_beygm.csv.sha256sum") return;
-        if (entry.fileName === "Storasnid_beygm.csv") {
+        if (entry.fileName === "KRISTINsnid.csv.sha256sum") return;
+        if (entry.fileName === "KRISTINsnid.csv") {
           zipfile.openReadStream(entry, (err, readStream) => {
             if (err) {
               reject(err);

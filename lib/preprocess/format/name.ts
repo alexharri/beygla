@@ -1,13 +1,34 @@
-import { DeclinedName, UnprocessedName } from "../../compress/types";
+import {
+  DeclinedName,
+  UnprocessedName,
+  WordCategory,
+} from "../../compress/types";
 import { getCase } from "./case";
 
 export function getRawName(line: string): UnprocessedName {
-  const [base, _id, _gender, name, caseString] = line.split(";");
+  // Properties prefixed with '_bin' have not been translated.
+  //
+  // See https://bin.arnastofnun.is/gogn/k-snid
+  const [
+    base,
+    _id,
+    gender,
+    category,
+    _bin_einkunn,
+    _bin_malsnid_ords,
+    _bin_malfraedi,
+    _bin_millivisun,
+    _bin_birting,
+    name,
+    caseString,
+  ] = line.split(";");
 
   return {
     base,
     case: caseString,
     name,
+    category: category as WordCategory,
+    gender,
   };
 }
 
@@ -18,5 +39,7 @@ export function formatName(name: UnprocessedName): DeclinedName {
     base: name.base,
     name: name.name,
     case: nameCase,
+    category: name.category,
+    gender: name.gender,
   };
 }

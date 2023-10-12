@@ -1,22 +1,25 @@
 import { Case } from "../../compress/types";
 
+export function isFirstVariationOfCase(caseString: string): boolean {
+  switch (caseString) {
+    case "NFET":
+    case "ÞFET":
+    case "ÞGFET":
+    case "EFET":
+      return true;
+  }
+  return false;
+}
+
 export function getCase(caseString: string): Case {
   switch (caseString) {
     case "NFET":
       return Case.Nominative;
     case "ÞFET":
-    case "ÞFET2":
-    case "ÞFET3":
-      /** @todo only use one of these, not both */
       return Case.Accusative;
     case "ÞGFET":
-    case "ÞGFET2":
-    case "ÞGFET3":
-      /** @todo only use one of these, not both */
       return Case.Dative;
     case "EFET":
-    case "EFET2":
-      /** @todo only use one of these, not both */
       return Case.Genitive;
     default:
       throw new Error(`Unexpected case '${caseString}'`);

@@ -76,7 +76,7 @@ describe("applyCase", () => {
 
     const out = applyCase("þgf", sourceName);
 
-    expect(out).toEqual("Gunnari Sigurbergi Brjánssyni");
+    expect(out).toEqual("Gunnari Sigurberg Brjánssyni");
   });
 
   it("strips whitespace in full names", () => {
@@ -150,12 +150,13 @@ describe("applyCase", () => {
       ["Sófús", "0;,,i,ar"],
       ["Kristólín", "0;,,,ar"],
       ["Jasper", "0;,,,s"],
-      ["Rúnel", "0;,,i,s"],
-      ["Agok", "0;,,i,s"],
+      ["Agok", "0;,,,s"],
     ];
 
     for (const [name, declension] of tests) {
-      expect(getDeclensionForName(name)).toEqual(declension);
+      expect(`${name}: ${getDeclensionForName(name)}`).toEqual(
+        `${name}: ${declension}`
+      );
     }
   });
 
@@ -170,7 +171,9 @@ describe("applyCase", () => {
     ];
 
     for (const name of tests) {
-      expect(getDeclensionForName(name)).toEqual(null);
+      expect(`${name}: ${getDeclensionForName(name)}`).toEqual(
+        `${name}: ${null}`
+      );
     }
   });
 });
