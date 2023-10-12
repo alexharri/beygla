@@ -189,4 +189,17 @@ describe("applyCase", () => {
       expect(applyCase(_case, "Eldey")).toEqual(name);
     }
   });
+
+  test("it does not apply declensions that can not possibly apply to a name", () => {
+    // The name 'Maya' would previously match the declension for 'Tanya', which
+    // is '4;anya,önyu,önyu,önyu'.
+    //
+    // The subtraction of 4 would erase the entire name. Applying the declension
+    // is non-sensical.
+    expect(getDeclensionForName("Maya")).toEqual(null);
+
+    for (const caseStr of <const>["nf", "þf", "þgf", "ef"]) {
+      expect(applyCase(caseStr, "Maya")).toEqual("Maya");
+    }
+  });
 });

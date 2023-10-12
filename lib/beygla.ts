@@ -27,11 +27,18 @@ function getCaseIndex(caseStr: Case) {
   return 0; // Fall back to 0 if an invalid case was provided
 }
 
-function declineName(name: string, declension: string, caseStr: Case): string {
+function parseDeclension(declension: string) {
   const [subtractString, appendicesString] = declension.split(";");
 
   const subtraction = Number(subtractString);
   const appendices = (appendicesString || "").split(",");
+
+  return [subtraction, appendices] as const;
+}
+
+function declineName(name: string, declension: string, caseStr: Case): string {
+  const [subtraction, appendices] = parseDeclension(declension);
+
   const caseIndex = getCaseIndex(caseStr);
 
   // Should not happen, but prefer being safe
@@ -59,7 +66,7 @@ function applyCaseToName(caseStr: Case, name: string) {
   }
 
   if (!postfix) {
-    const declension = extractDeclension(trie, name);
+    const declension = getDeclensionForName(name);
     if (declension) name = declineName(name, declension, caseStr);
   } else {
     name += declineName(postfix[0], postfix[1], caseStr);
@@ -110,5 +117,26 @@ export function applyCase(caseStr: Case, name: string): string {
 export function getDeclensionForName(name: string): string | null {
   if (name.split(/\s+/).length > 1)
     throw new Error("Name must not include whitespace");
-  return extractDeclension(trie, name);
+
+  const declension = extractDeclension(trie, name);
+  if (declension) {
+    // Ensure that the declension applies to the name. This guard is useful when
+    // the subtraction is longer than the path to the declension.
+    //
+    // For example, consider this:
+    //
+    //    {
+    //      "path": "ya",
+    //      "children": {},
+    //      "keys": ["Tanya"],
+    //      "value": "4;anya,önyu,önyu,önyu"
+    //    }
+    //
+    // The name 'Maya' matches this path, but applying the declension erases the
+    // entire name.
+    const [_subtraction, appendices] = parseDeclension(declension);
+    if (!name.endsWith(appendices[0])) return null;
+  }
+
+  return declension;
 }
