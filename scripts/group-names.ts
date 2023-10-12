@@ -76,7 +76,6 @@ async function main() {
   const out: string[][] = [];
 
   const namesWithMultipleGenders = new Set();
-  const namesWithMultipleDeclensions = new Set();
 
   for (const names of Object.values(groups)) {
     const byCategory: {
@@ -107,9 +106,6 @@ async function main() {
       }
       byCategory[name.category] ||= {};
       byCategory[name.category][name.gender] ||= {};
-      if (byCategory[name.category][name.gender][_case]) {
-        namesWithMultipleDeclensions.add(name.base);
-      }
       byCategory[name.category][name.gender][_case] ||= name;
     }
 
@@ -174,9 +170,6 @@ async function main() {
     `${excludedNames.length} of ${names.length} names (${percentage}) in 'name-cases.csv' are not present in 'words.csv' and are not included.\n`
   );
 
-  console.log(
-    `Found ${namesWithMultipleDeclensions.size} names with multiple declensions. The last declension is used.`
-  );
   console.log(
     `Found ${namesWithMultipleGenders.size} names with multiple genders. They are omitted from Beygla.\n`
   );
