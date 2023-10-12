@@ -7,6 +7,8 @@ import fsSync from "fs";
 import path from "path";
 import { getNames } from "../lib/preprocess/data/getNames";
 import { logWriteAndSize } from "../lib/preprocess/utils/gzip";
+import { getRawName } from "../lib/preprocess/format/name";
+import { isFirstVariationOfCase } from "../lib/preprocess/format/case";
 
 const nameCasesCsvFilePath = path.resolve(__dirname, "../out/name-cases.csv");
 const wordCasesCsvFilePath = path.resolve(__dirname, "../data/word-cases.csv");
@@ -25,9 +27,11 @@ async function main() {
   for await (const line of inputFile.readLines()) {
     nInputLines++;
 
-    const name = line.split(";")[0];
-
-    if (!nameSet.has(name)) {
+    const name = getRawName(line);
+    if (!nameSet.has(name.base)) {
+      continue;
+    }
+    if (!isFirstVariationOfCase(name.case)) {
       continue;
     }
 
@@ -37,7 +41,7 @@ async function main() {
 
   console.log(`Filtered ${nInputLines} entries into ${nOutputLines} entries.`);
 
-  await logWriteAndSize(nameCasesCsvFilePath);
+  logWriteAndSize(nameCasesCsvFilePath);
 }
 
 main();
