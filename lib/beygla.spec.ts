@@ -228,6 +228,18 @@ function runTests(beygla: typeof import("./beygla"), strict: boolean) {
           expect(applyCase(caseStr, "Maya")).toEqual("Maya");
         }
       });
+
+      if (strict) {
+        it("does not apply cases to non-Icelandic names", () => {
+          expect(applyCase("þgf", "Carlos")).toEqual("Carlos");
+        });
+      }
+
+      if (!strict) {
+        it("applies cases to non-Icelandic names", () => {
+          expect(applyCase("þgf", "Carlos")).toEqual("Carlosi");
+        });
+      }
     });
   });
 }
