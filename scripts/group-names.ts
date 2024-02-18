@@ -56,6 +56,7 @@ async function main() {
   const groups: Record<string, DeclinedName[]> = {};
 
   for (const line of lines) {
+    if (line === "") continue;
     const rawName = getRawName(line);
 
     if (!nameSet.has(rawName.base)) {
@@ -104,26 +105,17 @@ async function main() {
         default:
           throw new Error(`Unexpected case '${name.case}'`);
       }
-      byCategory[name.category] ||= {};
-      byCategory[name.category][name.gender] ||= {};
-      byCategory[name.category][name.gender][_case] ||= name;
+      for (const category of name.categories) {
+        byCategory[category] ||= {};
+        byCategory[category][name.gender] ||= {};
+        byCategory[category][name.gender][_case] ||= name;
+      }
     }
 
     let category: string | undefined;
     const categories = Object.keys(byCategory);
 
     assert(categories.length > 0, "should have at least 1 category");
-
-    if (
-      categories.length === 1 &&
-      ["gæl,ism", "dýr,hetja"].includes(categories[0])
-    ) {
-      // This seems like a data entry error, for which BÍN should be contacted.
-      // These occur for 1 word each.
-      //
-      // Anyway, ignore these while they are sorted out in the source.
-      continue;
-    }
 
     for (const preferredCategory of categoriesInOrderOfPreference) {
       if (categories.includes(preferredCategory)) {

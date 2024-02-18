@@ -29,7 +29,7 @@ export interface DeclinedName {
   name: string;
   case: Case;
   gender: string;
-  category: WordCategory;
+  categories: WordCategory[];
 }
 
 export interface UnprocessedName {
@@ -37,5 +37,5 @@ export interface UnprocessedName {
   name: string;
   case: string;
   gender: string;
-  category: WordCategory;
+  categories: WordCategory[];
 }
