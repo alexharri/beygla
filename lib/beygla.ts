@@ -59,7 +59,7 @@ export function setPredicate(pred: typeof predicate) {
 function applyCaseToName(caseStr: Case, name: string) {
   let postfix: [string, string] | null = null;
 
-  const endsWithSon = namesThatEndWithSon.includes(name);
+  const endsWithSon = namesThatEndWithSon.indexOf(name) !== -1;
   if (!endsWithSon) {
     for (const [ending, declension] of [
       ["son", "2;on,on,yni,onar"],
