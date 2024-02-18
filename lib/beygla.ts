@@ -4,7 +4,7 @@ import serializedInput from "./read/serializedInput";
 
 const trie = deserializeTrie(serializedInput);
 
-export type Case =
+type Case =
   // Icelandic cases
   | "nf"
   | "þf"
