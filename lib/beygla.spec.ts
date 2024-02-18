@@ -18,7 +18,7 @@ let beyglaStrict: typeof beygla | null = null;
 
 const testingBuild = process.env.TEST_BUILD === "true";
 if (testingBuild) {
-  // We specifically check for the precense of 'Testing built module.' in
+  // We specifically check for the precense of 'Testing built modules.' in
   // the 'test-build' script to make sure that we actually ran the test
   // on the build output.
   console.log("Testing built modules.");

@@ -13,8 +13,8 @@ console.log(
       .join("\n")
 );
 
-if (!output.includes("Testing built module.")) {
-  throw new Error(`Expected test output to include 'Testing built module'.`);
+if (!output.includes("Testing built modules.")) {
+  throw new Error(`Expected test output to include 'Testing built modules'.`);
 }
 
 console.log(`Ran test build successfully.`);
