@@ -51,8 +51,8 @@ function declineName(name: string, declension: string, caseStr: Case): string {
 
 const namesThatEndWithSon = ["Samson", "Jason"];
 
-let predicate: any;
-export function setPredicate(pred: any) {
+let predicate: ((name: string) => boolean) | null;
+export function setPredicate(pred: typeof predicate) {
   predicate = pred;
 }
 
