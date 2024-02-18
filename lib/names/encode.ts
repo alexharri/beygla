@@ -1,16 +1,16 @@
-interface Node {
+interface TrieNode {
   end: boolean;
-  children: Record<string, Node>;
+  children: Record<string, TrieNode>;
 }
 
 const isChars = "áðéíóúþæö";
 
-function emptyNode(): Node {
+function emptyNode(): TrieNode {
   return { children: {}, end: false };
 }
 
 export function encodeNames(names: Set<string>): string {
-  const root: Node = emptyNode();
+  const root: TrieNode = emptyNode();
 
   function add(name: string) {
     let curr = root;
@@ -27,7 +27,7 @@ export function encodeNames(names: Set<string>): string {
   for (const name of names) add(name);
 
   const chars: string[] = [];
-  function iter(char: string, curr: Node) {
+  function iter(char: string, curr: TrieNode) {
     const isCharIndex = isChars.indexOf(char);
     if (isCharIndex !== -1) {
       chars.push("'"); // Denotes an Icelandic character

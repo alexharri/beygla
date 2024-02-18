@@ -6,17 +6,17 @@ import { decodeNames } from "../strict";
 
 const firstUpper = (s: string) => s[0].toUpperCase() + s.substr(1);
 
-interface Node {
+interface TrieNode {
   e: number; // end
-  c: Record<string, Node>; // children
+  c: Record<string, TrieNode>; // children
 }
 
-function decodedTrieToSet(trie: Node) {
+function decodedTrieToSet(trie: TrieNode) {
   const set = new Set<string>();
 
-  function iter(node: Node, stack: string[]) {
+  function iter(node: TrieNode, stack: string[]) {
     if (node.e) set.add(firstUpper(stack.join("")));
-    const entries = Object.entries(node.c) as [string, Node][];
+    const entries = Object.entries(node.c) as [string, TrieNode][];
     for (const [char, next] of entries) {
       stack.push(char);
       iter(next, stack);
