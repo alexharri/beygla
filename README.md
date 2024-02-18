@@ -35,8 +35,9 @@ applyCase("þgf", "Helga Fríða Smáradóttir");
   - [Cases](#Cases)
   - [Whitespace](#Whitespace)
 - [Correctness](#Correctness)
-  - [Passing a name in the wrong case](Passing_a_name_in_the_wrong_case)
-  - [What happens if beygla does not find a pattern?](What_happens_if_beygla_does_not_find_a_pattern)
+  - [Strict mode](#Strict_mode)
+  - [Passing a name in the wrong case](#Passing_a_name_in_the_wrong_case)
+  - [What happens if beygla does not find a pattern?](#What_happens_if_beygla_does_not_find_a_pattern)
 
 ---
 
@@ -188,6 +189,20 @@ I tried randomly sampling 20 names from the list of legal Icelandic names not pr
 Even though I happened to get no incorrect results, this is a very small sample. I'm absolutely certain that there are a handful of names that will produce incorrect results.
 
 See [beygla.spec.ts](https://github.com/alexharri/beygla/blob/master/lib/beygla.spec.ts).
+
+<h3 id="Strict_mode">
+Strict mode
+</h3>
+
+Beygla provides a "strict version" accessible under `beygla/strict` which guarantees that declensions are only be applied to legal Icelandic names.
+
+```tsx
+import { applyCase } from "beygla/strict";
+```
+
+The interface for `beygla/strict` is the exact same as for `beygla`.
+
+Only declining Icelandic names may not be desirable when a correct declensions is not to applied to a foreign name. The `beygla/strict` module is also 15kB gzipped, which is three times larger than the standard `beygla` module.
 
 
 <h3 id="Passing_a_name_in_the_wrong_case">
