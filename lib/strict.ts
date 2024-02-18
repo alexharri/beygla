@@ -26,7 +26,7 @@ export function decodeNames(data: string): TrieNode {
 
 const trie = decodeNames(serializedNames);
 
-function predicate(name: string): boolean {
+function isIcelandicName(name: string): boolean {
   name = name.toLowerCase();
   let curr = trie;
   for (let i = 0; curr && i < name.length; i++) {
@@ -34,6 +34,6 @@ function predicate(name: string): boolean {
   }
   return !!(curr && curr.e);
 }
-setPredicate(predicate);
+setPredicate(isIcelandicName);
 
 export * from "./beygla";
