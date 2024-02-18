@@ -11,9 +11,7 @@ interface Node {
   c: Record<string, Node>; // children
 }
 
-export const makeTrieNode = (): Node => ({ e: 0, c: {} });
-
-export function decodedTrieToSet(trie: Node) {
+function decodedTrieToSet(trie: Node) {
   const set = new Set<string>();
 
   function iter(node: Node, stack: string[]) {
