@@ -1,3 +1,4 @@
+import "./test/mock";
 import * as _beygla from "./beygla";
 import serializedInput from "./read/serializedInput";
 import groupedNames from "../out/grouped-names.json";
@@ -15,19 +16,6 @@ if (testingBuild) {
 }
 
 const { applyCase, getDeclensionForName } = beygla;
-
-jest.mock("./read/serializedInput", () => {
-  const fs = require("fs");
-  const path = require("path");
-
-  const serializedTrieFilePath = path.resolve(__dirname, "../out/trie-ser.txt");
-  const serializedTrie = fs.readFileSync(serializedTrieFilePath, "utf-8");
-
-  return {
-    __esModule: true,
-    default: serializedTrie,
-  };
-});
 
 describe("applyCase", () => {
   it("mocks the serialized input correctly", () => {

@@ -4,7 +4,7 @@ import serializedInput from "./read/serializedInput";
 
 const trie = deserializeTrie(serializedInput);
 
-type Case =
+export type Case =
   // Icelandic cases
   | "nf"
   | "þf"
@@ -50,6 +50,11 @@ function declineName(name: string, declension: string, caseStr: Case): string {
 }
 
 const namesThatEndWithSon = ["Samson", "Jason"];
+
+let predicate: any;
+export function setPredicate(pred: any) {
+  predicate = pred;
+}
 
 function applyCaseToName(caseStr: Case, name: string) {
   let postfix: [string, string] | null = null;
@@ -110,8 +115,13 @@ function applyCaseToName(caseStr: Case, name: string) {
  * @param caseStr - The case to apply to the name to, e.g. `þf`
  */
 export function applyCase(caseStr: Case, name: string): string {
-  const names = name.split(/\s+/).filter(Boolean);
-  return names.map((name) => applyCaseToName(caseStr, name)).join(" ");
+  return name
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((name) =>
+      !predicate || predicate(name) ? applyCaseToName(caseStr, name) : name
+    )
+    .join(" ");
 }
 
 export function getDeclensionForName(name: string): string | null {

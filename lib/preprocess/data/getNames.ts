@@ -6,5 +6,6 @@ export function getNames(): string[] {
     path.resolve(__dirname, "../../../out/icelandic-names.json"),
     "utf-8"
   );
-  return JSON.parse(fileContent);
+  const names = JSON.parse(fileContent) as string[];
+  return names.filter((name) => !name.includes(" "));
 }

@@ -4,10 +4,13 @@ import { createAndPopulateTrie } from "../lib/compress/trie/createTrie";
 import { serializeTrie } from "../lib/compress/trie/serialize";
 import { deserializeTrie } from "../lib/read/deserialize";
 import { writeAndLogSize } from "../lib/preprocess/utils/gzip";
+import { encodeNames } from "../lib/names/encode";
+import { getNames } from "../lib/preprocess/data/getNames";
 
 const filePath = path.resolve(__dirname, "../out/grouped-names.json");
 const outFile = path.resolve(__dirname, "../out/trie-full.json");
-const serializedFile = path.resolve(__dirname, "../out/trie-ser.txt");
+const serializedTrieFileName = path.resolve(__dirname, "../out/trie-ser.txt");
+const serializedNamesFileName = path.resolve(__dirname, "../out/names-ser.txt");
 const deserializedJsonFile = path.resolve(__dirname, "../out/trie-deser.json");
 
 async function main() {
@@ -17,12 +20,15 @@ async function main() {
 
   writeAndLogSize(outFile, JSON.stringify(trie));
 
-  const serialized = serializeTrie(trie.getTrie());
-  writeAndLogSize(serializedFile, serialized);
+  const serializedTrie = serializeTrie(trie.getTrie());
+  writeAndLogSize(serializedTrieFileName, serializedTrie);
   writeAndLogSize(
     deserializedJsonFile,
-    JSON.stringify(deserializeTrie(serialized))
+    JSON.stringify(deserializeTrie(serializedTrie))
   );
+
+  const serializedNames = encodeNames(new Set(getNames()));
+  writeAndLogSize(serializedNamesFileName, serializedNames);
 }
 
 main();
