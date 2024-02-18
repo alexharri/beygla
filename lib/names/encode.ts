@@ -3,8 +3,6 @@ interface TrieNode {
   children: Record<string, TrieNode>;
 }
 
-const isChars = "áðéíóúþæö";
-
 function emptyNode(): TrieNode {
   return { children: {}, end: false };
 }
@@ -28,11 +26,6 @@ export function encodeNames(names: Set<string>): string {
 
   const chars: string[] = [];
   function iter(char: string, curr: TrieNode) {
-    const isCharIndex = isChars.indexOf(char);
-    if (isCharIndex !== -1) {
-      chars.push("'"); // Denotes an Icelandic character
-      char = String(isCharIndex);
-    }
     chars.push(char);
     if (curr.end) chars.push(".");
 

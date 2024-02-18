@@ -17,7 +17,6 @@ export function decodeNames(data: string): TrieNode {
     } else if (char === "<") {
       stack.pop();
     } else {
-      if (char === "'") char = "áðéíóúþæö"[+data[++i]];
       stack.push((node.c[char] ||= { e: 0, c: {} }));
     }
   }
