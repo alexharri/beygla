@@ -30,16 +30,8 @@ export function decodeNames(data: string): TrieNode {
 
 const trie = decodeNames(serializedNames);
 
-const endings = ["son", "dóttir", "bur"];
-
 function predicate(name: string): boolean {
   name = name.toLowerCase();
-
-  endings.forEach((ending) => {
-    if (name.endsWith(ending))
-      name = name.substring(0, name.length - ending.length);
-  });
-
   let curr = trie;
   for (let i = 0; curr && i < name.length; i++) {
     curr = curr.c[name[i]];

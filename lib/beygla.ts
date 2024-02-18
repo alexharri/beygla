@@ -59,20 +59,23 @@ export function setPredicate(pred: any) {
 function applyCaseToName(caseStr: Case, name: string) {
   let postfix: [string, string] | null = null;
 
-  for (const [ending, declension] of [
-    ["son", "2;on,on,yni,onar"],
-    ["dóttir", "2;ir,ur,ur,ur"],
-    ["bur", "0;,,i,s"],
-  ]) {
-    if (!name.endsWith(ending)) continue;
-    if (namesThatEndWithSon.indexOf(name) !== -1) continue;
-    postfix = [ending, declension];
-    name = name.split(ending)[0];
+  const endsWithSon = namesThatEndWithSon.includes(name);
+  if (!endsWithSon) {
+    for (const [ending, declension] of [
+      ["son", "2;on,on,yni,onar"],
+      ["dóttir", "2;ir,ur,ur,ur"],
+      ["bur", "0;,,i,s"],
+    ]) {
+      if (!name.endsWith(ending)) continue;
+      postfix = [ending, declension];
+      name = name.split(ending)[0];
+    }
   }
 
   if (!postfix) {
     const declension = getDeclensionForName(name);
-    if (declension) name = declineName(name, declension, caseStr);
+    if (declension && (!predicate || predicate(name)))
+      name = declineName(name, declension, caseStr);
   } else {
     name += declineName(postfix[0], postfix[1], caseStr);
   }
@@ -118,9 +121,7 @@ export function applyCase(caseStr: Case, name: string): string {
   return name
     .split(/\s+/)
     .filter(Boolean)
-    .map((name) =>
-      !predicate || predicate(name) ? applyCaseToName(caseStr, name) : name
-    )
+    .map((name) => applyCaseToName(caseStr, name))
     .join(" ");
 }
 
