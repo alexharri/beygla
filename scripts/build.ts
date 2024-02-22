@@ -23,12 +23,18 @@ async function main() {
   // Remove 'dist/common/' and 'dist/read/'
   run(`rm -rf dist/common/ dist/read/`);
 
-  const emittedJsFileNames = ["beygla.js", "beygla.esm.js"];
+  const emittedJsFileNames = [
+    "beygla.js",
+    "beygla.esm.js",
+    "strict.js",
+    "strict.esm.js",
+  ];
 
   const filesThatShouldExist = new Set([
     "package.json",
     "README.md",
     "beygla.d.ts",
+    "strict.d.ts",
     ...emittedJsFileNames,
   ]);
 
@@ -50,6 +56,10 @@ async function main() {
     path.resolve(OUT_DIR, "./trie-ser.txt"),
     "utf-8"
   );
+  const serializedNames = fs.readFileSync(
+    path.resolve(OUT_DIR, "./names-ser.txt"),
+    "utf-8"
+  );
 
   if (serializedTrie.length < 1000) {
     throw new Error(
@@ -69,6 +79,17 @@ async function main() {
       `serializedInput = "@@input@@"`,
       `serializedInput = "${serializedTrie}"`
     );
+    if (fileName.startsWith("strict")) {
+      if (!fileContent.includes(`serializedNames = "@@input@@"`)) {
+        throw new Error(
+          `Expected '${fileName}' to include 'serializedNames = "@@input@@"'`
+        );
+      }
+      fileContent = fileContent.replace(
+        `serializedNames = "@@input@@"`,
+        `serializedNames = "${serializedNames}"`
+      );
+    }
     fs.writeFileSync(filePath, fileContent, "utf-8");
   }
 

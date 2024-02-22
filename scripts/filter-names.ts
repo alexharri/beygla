@@ -25,6 +25,7 @@ async function main() {
   const nameSet = new Set(getNames());
 
   for await (const line of inputFile.readLines()) {
+    if (line === "") continue;
     nInputLines++;
 
     const name = getRawName(line);

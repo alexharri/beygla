@@ -51,23 +51,31 @@ function declineName(name: string, declension: string, caseStr: Case): string {
 
 const namesThatEndWithSon = ["Samson", "Jason"];
 
+let predicate: ((name: string) => boolean) | null;
+export function setPredicate(pred: typeof predicate) {
+  predicate = pred;
+}
+
 function applyCaseToName(caseStr: Case, name: string) {
   let postfix: [string, string] | null = null;
 
-  for (const [ending, declension] of [
-    ["son", "2;on,on,yni,onar"],
-    ["dóttir", "2;ir,ur,ur,ur"],
-    ["bur", "0;,,i,s"],
-  ]) {
-    if (!name.endsWith(ending)) continue;
-    if (namesThatEndWithSon.indexOf(name) !== -1) continue;
-    postfix = [ending, declension];
-    name = name.split(ending)[0];
+  const endsWithSon = namesThatEndWithSon.indexOf(name) !== -1;
+  if (!endsWithSon) {
+    for (const [ending, declension] of [
+      ["son", "2;on,on,yni,onar"],
+      ["dóttir", "2;ir,ur,ur,ur"],
+      ["bur", "0;,,i,s"],
+    ]) {
+      if (!name.endsWith(ending)) continue;
+      postfix = [ending, declension];
+      name = name.split(ending)[0];
+    }
   }
 
   if (!postfix) {
     const declension = getDeclensionForName(name);
-    if (declension) name = declineName(name, declension, caseStr);
+    if (declension && (!predicate || predicate(name)))
+      name = declineName(name, declension, caseStr);
   } else {
     name += declineName(postfix[0], postfix[1], caseStr);
   }
@@ -110,8 +118,11 @@ function applyCaseToName(caseStr: Case, name: string) {
  * @param caseStr - The case to apply to the name to, e.g. `þf`
  */
 export function applyCase(caseStr: Case, name: string): string {
-  const names = name.split(/\s+/).filter(Boolean);
-  return names.map((name) => applyCaseToName(caseStr, name)).join(" ");
+  return name
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((name) => applyCaseToName(caseStr, name))
+    .join(" ");
 }
 
 export function getDeclensionForName(name: string): string | null {

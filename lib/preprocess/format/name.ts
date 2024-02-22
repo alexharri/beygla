@@ -27,7 +27,7 @@ export function getRawName(line: string): UnprocessedName {
     base,
     case: caseString,
     name,
-    category: category as WordCategory,
+    categories: category.split(",") as WordCategory[],
     gender,
   };
 }
@@ -39,7 +39,7 @@ export function formatName(name: UnprocessedName): DeclinedName {
     base: name.base,
     name: name.name,
     case: nameCase,
-    category: name.category,
+    categories: name.categories,
     gender: name.gender,
   };
 }

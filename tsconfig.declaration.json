@@ -5,20 +5,9 @@
     "noUnusedLocals": true,
     "noImplicitAny": true,
     "esModuleInterop": true,
-    "lib": [
-      "es2020",
-    ],
-    "types": [
-      "jest",
-      "node",
-    ]
+    "lib": ["es2020"],
+    "types": ["jest", "node"]
   },
-  "include": [
-    "lib/beygla.ts",
-    "rollup.config.ts"
-  ],
-  "exclude": [
-    "lib/**/*.spec.ts",
-    "lib/**/*.typecheck.ts",
-  ]
+  "include": ["lib/beygla.ts", "lib/strict.ts", "rollup.config.ts"],
+  "exclude": ["lib/**/*.spec.ts", "lib/**/*.typecheck.ts"]
 }
