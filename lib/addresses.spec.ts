@@ -1,0 +1,114 @@
+import "./test/mockAddresses";
+import * as _beygla from "./beygla";
+import groupedAddresses from "../out/grouped-addresses-with-dash.json";
+import serializedInput from "./read/serializedInput";
+import icelandicAddressesList from "../out/icelandic-addresses.json";
+
+const icelandicAddresses = new Set(icelandicAddressesList);
+
+let beygla = _beygla;
+
+const testingBuild = process.env.TEST_BUILD === "true";
+if (testingBuild) {
+  // We specifically check for the precense of 'Testing built modules.' in
+  // the 'test-build' script to make sure that we actually ran the test
+  // on the build output.
+  console.log("Testing built 'beygla/addresses' module.");
+
+  beygla = require("../dist/addresses.esm.js");
+}
+
+const knownProblemAddresses = [
+  "Efri-Hreppur",
+  "Efri-Núpur",
+  "Efsta-Grund",
+  "Forna-Krossnes",
+  "Hóll",
+  "Hvoll",
+  "Litla-Ásgeirsá",
+  "Litla-Borg",
+  "Litla-Breiðuvík",
+  "Litla-Brekka",
+  "Litla-Dímon",
+  "Litla-Drageyri",
+  "Litla-Eyri",
+  "Litla-Giljá",
+  "Litla-Grund",
+  "Litla-Gröf",
+  "Litla-Heiði",
+  "Litla-Hvalsá",
+  "Litla-Sandvík",
+  "Litla-Tunga",
+  "Litli-Hóll",
+  "Meiri-Hattardalur",
+  "Meiri-Tunga",
+  "Minni-Borg",
+  "Minni-Brekka",
+  "Minni-Grindill",
+  "Minni-Hattardalur",
+  "Minni-Mástunga",
+  "Minni-Núpur",
+  "Neðri-Ás",
+  "Neðri-Háls",
+  "Neðri-Hóll",
+  "Neðri-Hreppur",
+  "Neðri-Núpur",
+  "Nýja-Sjáland",
+  "Stóra-Ármót",
+  "Stóra-Búrfell",
+  "Stóra-Fjall",
+  "Stóra-Fjarðarhorn",
+  "Stóra-Hildisey",
+  "Stóra-Hof",
+  "Stóra-Hraun",
+  "Stóra-Mörk",
+  "Stóra-Núpskirkja",
+  "Stóra-Sandfell",
+  "Stóra-Steinsvað",
+  "Stóra-Vatnshorn",
+  "Stóra-Vatnsskarð",
+  "Stóri-Ás",
+  "Stóri-Botn",
+  "Stærri-Árskógur",
+  "Syðri-Hóll",
+  "Syðri-Völlur",
+  "Syðsta-Grund",
+  "Syðsta-Mörk",
+  "Ysti-Hóll",
+  "Ytri-Bakki",
+  "Ytri-Hóll",
+  "Ytri-Hólmur",
+  "Ytri-Ós",
+];
+
+const { applyCase, getDeclensionForName, setMode } = beygla;
+setMode("addresses");
+
+describe("beygla/addresses", () => {
+  describe("applyCase", () => {
+    it("mocks the serialized input correctly", () => {
+      expect(serializedInput).not.toEqual("@@input@@");
+      expect(serializedInput.startsWith("{")).toEqual(true);
+    });
+
+    it("applies a case to an address", () => {
+      const out = applyCase("ef", "Katrínarlind");
+      expect(out).toEqual("Katrínarlindar");
+    });
+
+    it("correctly applies every case to every name (aside from known problem names)", () => {
+      for (const addresses of groupedAddresses) {
+        const addressNominativeCase = addresses[0];
+
+        if (knownProblemAddresses.includes(addressNominativeCase)) continue;
+
+        const cases = ["nf", "þf", "þgf", "ef"] as const;
+        for (const [i, caseStr] of cases.entries()) {
+          const expected = addresses[i];
+          const actual = applyCase(caseStr, addressNominativeCase);
+          expect(actual).toEqual(expected);
+        }
+      }
+    });
+  });
+});

@@ -7,7 +7,10 @@ import { writeAndLogSize } from "../lib/preprocess/utils/gzip";
 import { encodeNames } from "../lib/names/encode";
 import { getAddresses } from "../lib/preprocess/data/getNames";
 
-const filePath = path.resolve(__dirname, "../out/grouped-addresses.json");
+const filePath = path.resolve(
+  __dirname,
+  "../out/grouped-addresses-split-dash.json"
+);
 const outFile = path.resolve(__dirname, "../out/addresses-trie-full.json");
 const serializedTrieFileName = path.resolve(
   __dirname,
