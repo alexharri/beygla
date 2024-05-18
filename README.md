@@ -190,7 +190,7 @@ applyCase("þgf", "Þjórsárdalur");
 //=> "Þjórsárdal"
 ```
 
-It's behavior is the same as the regular `beygla` module, except it contains data that allows it to apply cases to Icelandic addresses and place names instead of person names. All of the same pattern matching behaviors and limitations apply.
+Its behavior is the same as the regular `beygla` module, except it contains data that allows it to apply cases to Icelandic addresses and place names instead of person names. All of the same pattern matching behaviors and limitations apply.
 
 The `beygla/addresses` module is around 4.9kB gzipped.
 
