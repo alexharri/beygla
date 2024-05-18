@@ -20,21 +20,11 @@ export function formatDeclension(names: string[]): string {
 
   const subtract = name.length - root.length;
 
-  if (subtract > 9) {
-    // If this limit is reached in the future, update the serializer/deserializer
-    // to read 2+ digit numbers.
-    throw new Error(
-      `Declension subraction for name '${name}' exceeds 9 characters.`
-    );
-  }
-
   function getEnding(name: string) {
     return name.substr(root.length);
   }
 
-  const declension = `${subtract};${names
-    .map((name) => getEnding(name))
-    .join(",")}`;
+  const declension = `${subtract};${names.map(getEnding).join(",")}`;
 
   if (declension === NO_DECLENSION) return NO_DECLENSION_MARKER;
   return declension;

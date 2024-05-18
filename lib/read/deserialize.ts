@@ -1,9 +1,11 @@
 import { NO_DECLENSION, NO_DECLENSION_MARKER } from "../common/constants";
 import { CompressedTrie } from "../common/types";
 
-const isChar = (c: string) => c.toLowerCase() !== c.toUpperCase();
+const isChar = (c: string) => c === "-" || c.toLowerCase() !== c.toUpperCase();
 const isNumeric = (c: string) => /^[0-9]$/.test(c);
-const validTerminator = (c: string) => ["!", "-"].indexOf(c) !== -1;
+const validTerminator = (c: string) => ["!", "_"].indexOf(c) !== -1;
+
+type Node = [node: CompressedTrie, done: boolean];
 
 export function deserializeTrie(str: string): CompressedTrie {
   let i = 0;
@@ -11,26 +13,28 @@ export function deserializeTrie(str: string): CompressedTrie {
   const char = () => str.substr(i, 1);
   const next = () => i++;
 
-  function deserializeLeaf(): [node: CompressedTrie, done: boolean] {
-    // Currently we check that the maximum subtraction (num) is 9, so we
-    // can read one digit and continue.
-    //
-    // This check occurs in 'declension.ts'.
-    const subtraction = char();
+  function deserializeLeaf(): Node {
+    let subtraction = char();
     next(); // Move beyond number to ';' or '~'
 
-    const returnValue = (
-      c: string,
-      value: string
-    ): [node: CompressedTrie, done: boolean] => {
+    function returnValue(c: string, value: string): Node {
       if (!validTerminator(c)) throw new Error("INV_TER: " + c);
       return [{ value, children: {} }, c === "!"];
-    };
+    }
 
     if (subtraction === NO_DECLENSION_MARKER) {
       const c = char();
       next(); // Move beyond terminator
       return returnValue(c, NO_DECLENSION);
+    }
+
+    // Subtraction may be composed of multiple numbers. Keep searching
+    {
+      let c: string;
+      while (isNumeric((c = char()))) {
+        subtraction += c;
+        next();
+      }
     }
 
     next(); // Move to first part
@@ -72,7 +76,7 @@ export function deserializeTrie(str: string): CompressedTrie {
     return key;
   }
 
-  function deserializeObject(): [node: CompressedTrie, done: boolean] {
+  function deserializeObject(): Node {
     next(); // Move to first property
 
     const children: CompressedTrie["children"] = {};
@@ -90,7 +94,7 @@ export function deserializeTrie(str: string): CompressedTrie {
     }
   }
 
-  function deserialize(): [node: CompressedTrie, done: boolean] {
+  function deserialize(): Node {
     const c = char();
     if (c === NO_DECLENSION_MARKER || isNumeric(c)) {
       return deserializeLeaf();

@@ -21,7 +21,11 @@ export enum WordCategory {
   CompanyOrOrganizationName = "fyr",
   OtherNames = "heö",
   AstrologicalNames = "stja",
+  Animals = "dýr",
   General = "alm",
+  Structures = "mvirk",
+  UrbanAreas = "þor",
+  CountiesOrNeighborhoodsOrRegions = "svaedi",
 }
 
 export interface DeclinedName {
