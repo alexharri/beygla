@@ -26,9 +26,9 @@ const deserializedJsonFile = path.resolve(
 );
 
 async function main() {
-  const names: string[][] = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+  const addresses: string[][] = JSON.parse(fs.readFileSync(filePath, "utf-8"));
 
-  const trie = createAndPopulateTrie(names);
+  const trie = createAndPopulateTrie(addresses);
 
   writeAndLogSize(outFile, JSON.stringify(trie));
 
@@ -39,8 +39,8 @@ async function main() {
     JSON.stringify(deserializeTrie(serializedTrie))
   );
 
-  const serializedNames = encodeNames(new Set(getAddresses()));
-  writeAndLogSize(serializedAddressesFileName, serializedNames);
+  const serializedAddresses = encodeNames(new Set(getAddresses()));
+  writeAndLogSize(serializedAddressesFileName, serializedAddresses);
 }
 
 main();
