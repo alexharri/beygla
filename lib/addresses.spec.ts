@@ -7,9 +7,9 @@ let beygla = _beygla;
 
 const testingBuild = process.env.TEST_BUILD === "true";
 if (testingBuild) {
-  // We specifically check for the precense of 'Testing built modules.' in
-  // the 'test-build' script to make sure that we actually ran the test
-  // on the build output.
+  // We specifically check for the precense of this message in the
+  // 'test-addresses-build' script to make sure that we actually ran
+  // the test on the build output.
   console.log("Testing built 'beygla/addresses' module.");
 
   beygla = require("../dist/addresses.esm.js");
