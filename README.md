@@ -34,6 +34,7 @@ applyCase("þgf", "Helga Fríða Smáradóttir");
 - [Usage](#Usage)
   - [Cases](#Cases)
   - [Whitespace](#Whitespace)
+- [Addresses](#Addresses)
 - [Correctness](#Correctness)
   - [Strict mode](#Strict_mode)
   - [Passing a name in the wrong case](#Passing_a_name_in_the_wrong_case)
@@ -169,6 +170,29 @@ If the name includes superfluous whitespace, `applyCase` removes it.
 applyCase("þgf", "  \n  Helga  Dís\tSmáradóttir  \n\n");
 //=> "Helgu Dís Smáradóttur"
 ```
+
+<h2 id="Addresses">
+Addresses
+</h2>
+
+The `beygla/addresses` module allows you to apply declension to Icelandic addresses and place names:
+
+```ts
+import { applyCase } from "beygla/addresses";
+
+applyCase("þf", "Rauðalækur 63");
+//=> "Rauðalæk 63"
+
+applyCase("ef", "Reykjavík");
+//=> "Reykjavíkur"
+
+applyCase("þgf", "Þjórsárdalur");
+//=> "Þjórsárdal"
+```
+
+It's behavior is the same as the regular `beygla` module, except it contains data that allows it to apply cases to Icelandic addresses and place names instead of person names. All of the same pattern matching behaviors and limitations apply.
+
+The `beygla/addresses` module is around 4.9kB gzipped.
 
 <h2 id="Correctness">
 Correctness
