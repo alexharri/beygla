@@ -1,10 +1,7 @@
 import "./test/mockAddresses";
 import * as _beygla from "./beygla";
-import groupedAddresses from "../out/grouped-addresses-with-dash.json";
+import groupedAddressesWithDash from "../out/grouped-addresses-with-dash.json";
 import serializedInput from "./read/serializedInput";
-import icelandicAddressesList from "../out/icelandic-addresses.json";
-
-const icelandicAddresses = new Set(icelandicAddressesList);
 
 let beygla = _beygla;
 
@@ -97,7 +94,7 @@ describe("beygla/addresses", () => {
     });
 
     it("correctly applies every case to every name (aside from known problem names)", () => {
-      for (const addresses of groupedAddresses) {
+      for (const addresses of groupedAddressesWithDash) {
         const addressNominativeCase = addresses[0];
 
         if (knownProblemAddresses.includes(addressNominativeCase)) continue;
@@ -109,6 +106,16 @@ describe("beygla/addresses", () => {
           expect(actual).toEqual(expected);
         }
       }
+    });
+
+    it("applies a case to an address with a number", () => {
+      expect(applyCase("ef", "Katrínartún 4")).toEqual("Katrínartúns 4");
+      expect(applyCase("þf", "Rauðalækur 63")).toEqual("Rauðalæk 63");
+    });
+
+    it("strips whitespace", () => {
+      const sourceName = "  \n  Rauðalækur  \t63\n";
+      expect(applyCase("þf", sourceName)).toEqual("Rauðalæk 63");
     });
   });
 });
