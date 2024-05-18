@@ -78,6 +78,14 @@ async function main() {
     "addresses.js": serializedAddressesTrie,
     "addresses.esm.js": serializedAddressesTrie,
   };
+  const modeByFileName: Partial<Record<string, string>> = {
+    "beygla.js": "names",
+    "beygla.esm.js": "names",
+    "strict.js": "names",
+    "strict.esm.js": "names",
+    "addresses.js": "addresses",
+    "addresses.esm.js": "addresses",
+  };
 
   for (const value of Object.values(serializedTrieByFileName)) {
     if (!value || value.length < 1000) {
@@ -102,6 +110,14 @@ async function main() {
     fileContent = fileContent.replace(
       `serializedInput = "@@input@@"`,
       `serializedInput = "${serializedTrie}"`
+    );
+    const mode = modeByFileName[fileName];
+    if (!mode) {
+      throw new Error(`No mode registered for '${fileName}'`);
+    }
+    fileContent = fileContent.replace(
+      `mode = process.env.BEYGLA_MODE`,
+      `mode = "${mode}"`
     );
     if (fileName.startsWith("strict")) {
       if (!fileContent.includes(`serializedNames = "@@input@@"`)) {

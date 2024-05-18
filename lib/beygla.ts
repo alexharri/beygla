@@ -1,13 +1,9 @@
 import { deserializeTrie } from "./read/deserialize";
 import { extractDeclension } from "./read/extractDeclension";
 import serializedInput from "./read/serializedInput";
+import mode from "./read/mode";
 
 const trie = deserializeTrie(serializedInput);
-
-let mode: "names" | "addresses" = "names";
-export function setMode(newMode: typeof mode) {
-  mode = newMode;
-}
 
 type Case =
   // Icelandic cases

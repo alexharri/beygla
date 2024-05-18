@@ -13,3 +13,5 @@ jest.mock("../read/serializedInput", () => {
     default: serializedTrie,
   };
 });
+
+jest.mock("../read/mode", () => ({ __esModule: true, default: "addresses" }));

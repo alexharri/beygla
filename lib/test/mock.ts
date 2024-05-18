@@ -14,6 +14,8 @@ jest.mock("../read/serializedInput", () => {
   };
 });
 
+jest.mock("../read/mode", () => ({ __esModule: true, default: "names" }));
+
 jest.mock("../read/serializedNames", () => {
   const fs = require("fs");
   const path = require("path");

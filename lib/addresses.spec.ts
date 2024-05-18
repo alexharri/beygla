@@ -2,6 +2,7 @@ import "./test/mockAddresses";
 import * as _beygla from "./beygla";
 import groupedAddressesWithDash from "../out/grouped-addresses-with-dash.json";
 import serializedInput from "./read/serializedInput";
+import mode from "./read/mode";
 
 let beygla = _beygla;
 
@@ -78,14 +79,14 @@ const knownProblemAddresses = [
   "Ytri-Ós",
 ];
 
-const { applyCase, getDeclensionForName, setMode } = beygla;
-setMode("addresses");
+const { applyCase } = beygla;
 
 describe("beygla/addresses", () => {
   describe("applyCase", () => {
     it("mocks the serialized input correctly", () => {
       expect(serializedInput).not.toEqual("@@input@@");
       expect(serializedInput.startsWith("{")).toEqual(true);
+      expect(mode).toEqual("addresses");
     });
 
     it("applies a case to an address", () => {
