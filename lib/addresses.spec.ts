@@ -83,9 +83,12 @@ const { applyCase } = beygla;
 
 describe("beygla/addresses", () => {
   describe("applyCase", () => {
-    it("mocks the serialized input correctly", () => {
+    it("mocks the serialized input", () => {
       expect(serializedInput).not.toEqual("@@input@@");
       expect(serializedInput.startsWith("{")).toEqual(true);
+    });
+
+    it("mocks the mode", () => {
       expect(mode).toEqual("addresses");
     });
 
