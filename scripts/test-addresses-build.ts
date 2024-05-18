@@ -1,6 +1,6 @@
 import { execSync } from "child_process";
 
-const output = execSync(`npm run test:build`, {
+const output = execSync(`npm run test:addresses-build`, {
   encoding: "utf-8",
   stdio: "pipe",
 });
@@ -13,8 +13,10 @@ console.log(
       .join("\n")
 );
 
-if (!output.includes("Testing built modules.")) {
-  throw new Error(`Expected test output to include 'Testing built modules'.`);
+if (!output.includes("Testing built 'beygla/addresses' module.")) {
+  throw new Error(
+    `Expected test output to include 'Testing built 'beygla/addresses' module'.`
+  );
 }
 
 console.log(`Ran test build successfully.`);

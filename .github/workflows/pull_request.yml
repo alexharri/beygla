@@ -29,5 +29,8 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Test build
-        run: npm run script -- test-build
+      - name: Test names build
+        run: npm run script -- test-names-build
+
+      - name: Test addresses build
+        run: npm run script -- test-addresses-build

@@ -5,7 +5,8 @@
   "types": "beygla.d.ts",
   "scripts": {
     "test": "jest",
-    "test:build": "TEST_BUILD=true jest beygla.spec.ts",
+    "test:names-build": "TEST_BUILD=true jest beygla.spec.ts",
+    "test:addresses-build": "TEST_BUILD=true jest addresses.spec.ts",
     "test:watch": "jest --watchAll",
     "test:ci": "jest --ci --coverage",
     "tscheck": "tsc --noEmit --skipLibCheck",
