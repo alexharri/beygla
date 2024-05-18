@@ -37,8 +37,8 @@ async function main() {
   const addressSet = new Set(addresses);
 
   const configs = [
-    { split: true, postfix: "split-dash" },
     { split: false, postfix: "with-dash" },
+    { split: true, postfix: "split-dash" },
   ];
   for (const { split, postfix } of configs) {
     const groups: Record<string, DeclinedName[]> = {};
