@@ -1,8 +1,11 @@
 import { TrieNode } from "./Trie";
 
+const TER_LAST = "!";
+const TER = "_";
+
 export function serializeTrie(trie: TrieNode): string {
   function serializeLeaf(node: TrieNode, last: boolean): string {
-    const terminator = last ? "!" : "-";
+    const terminator = last ? TER_LAST : TER;
     return node.value + terminator;
   }
 
@@ -22,7 +25,7 @@ export function serializeTrie(trie: TrieNode): string {
       })
       .join("");
 
-    const terminator = last ? "!" : "-";
+    const terminator = last ? TER_LAST : TER;
     out += terminator;
 
     return out;

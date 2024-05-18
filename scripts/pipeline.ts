@@ -11,11 +11,18 @@ const hasDownloadedWords = fs.existsSync(
 if (!hasDownloadedWords) run(`npm run script -- download-words`);
 
 const scripts = [
+  // Names
   "prepare-list-of-names",
   "filter-names",
   "group-names",
   "process-names",
   "sankey-diagram",
+
+  // Addresses
+  "prepare-list-of-addresses",
+  "filter-addresses",
+  "group-addresses",
+  "process-addresses",
 ];
 
 for (const script of scripts) {

@@ -1,6 +1,7 @@
 import "./test/mock";
 import * as _beygla from "./beygla";
 import serializedInput from "./read/serializedInput";
+import mode from "./read/mode";
 import groupedNames from "../out/grouped-names.json";
 import icelandicNamesList from "../out/icelandic-names.json";
 
@@ -38,6 +39,10 @@ function runTests(beygla: typeof import("./beygla"), strict: boolean) {
       it("mocks the serialized input correctly", () => {
         expect(serializedInput).not.toEqual("@@input@@");
         expect(serializedInput.startsWith("{")).toEqual(true);
+      });
+
+      it("mocks the mode", () => {
+        expect(mode).toEqual("names");
       });
 
       it("applies a case to a name", () => {

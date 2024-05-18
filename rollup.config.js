@@ -4,8 +4,13 @@ const mainConfig = {
   input: ["lib/beygla.ts"],
   external: [],
   output: [
+    // Names
     { file: `dist/beygla.js`, format: "cjs", exports: "auto" },
     { file: `dist/beygla.esm.js`, format: "es" },
+
+    // Addresses
+    { file: `dist/addresses.js`, format: "cjs", exports: "auto" },
+    { file: `dist/addresses.esm.js`, format: "es" },
   ],
   plugins: [
     typescript({

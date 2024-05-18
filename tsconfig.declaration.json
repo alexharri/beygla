@@ -8,6 +8,11 @@
     "lib": ["es2020"],
     "types": ["jest", "node"]
   },
-  "include": ["lib/beygla.ts", "lib/strict.ts", "rollup.config.ts"],
+  "include": [
+    "lib/beygla.ts",
+    "lib/strict.ts",
+    "lib/addresses.ts",
+    "rollup.config.ts"
+  ],
   "exclude": ["lib/**/*.spec.ts", "lib/**/*.typecheck.ts"]
 }

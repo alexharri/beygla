@@ -1,6 +1,6 @@
 // This script filters the very, very large 'word-cases.csv' file into a
 // 'name-cases.csv' file that only contains the lines in 'word-cases.csv' that
-// correspond to names contained in from 'icelandic-names.json'.
+// correspond to names contained in 'icelandic-names.json'.
 
 import fs from "fs/promises";
 import fsSync from "fs";

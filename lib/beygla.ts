@@ -1,6 +1,7 @@
 import { deserializeTrie } from "./read/deserialize";
 import { extractDeclension } from "./read/extractDeclension";
 import serializedInput from "./read/serializedInput";
+import mode from "./read/mode";
 
 const trie = deserializeTrie(serializedInput);
 
@@ -49,37 +50,31 @@ function declineName(name: string, declension: string, caseStr: Case): string {
   return root + appendices[caseIndex];
 }
 
-const namesThatEndWithSon = ["Samson", "Jason"];
-
 let predicate: ((name: string) => boolean) | null;
 export function setPredicate(pred: typeof predicate) {
   predicate = pred;
 }
 
 function applyCaseToName(caseStr: Case, name: string) {
-  let postfix: [string, string] | null = null;
-
-  const endsWithSon = namesThatEndWithSon.indexOf(name) !== -1;
-  if (!endsWithSon) {
-    for (const [ending, declension] of [
-      ["son", "2;on,on,yni,onar"],
-      ["dóttir", "2;ir,ur,ur,ur"],
-      ["bur", "0;,,i,s"],
-    ]) {
-      if (!name.endsWith(ending)) continue;
-      postfix = [ending, declension];
-      name = name.split(ending)[0];
+  if (mode === "names") {
+    const namesThatEndWithSon = ["Samson", "Jason"];
+    const endsWithSon = namesThatEndWithSon.indexOf(name) !== -1;
+    if (!endsWithSon) {
+      for (const [ending, declension] of [
+        ["son", "2;on,on,yni,onar"],
+        ["dóttir", "2;ir,ur,ur,ur"],
+        ["bur", "0;,,i,s"],
+      ]) {
+        if (!name.endsWith(ending)) continue;
+        name = name.split(ending)[0];
+        return name + declineName(ending, declension, caseStr);
+      }
     }
   }
 
-  if (!postfix) {
-    const declension = getDeclensionForName(name);
-    if (declension && (!predicate || predicate(name)))
-      name = declineName(name, declension, caseStr);
-  } else {
-    name += declineName(postfix[0], postfix[1], caseStr);
-  }
-
+  const declension = getDeclensionForName(name);
+  if (declension && (!predicate || predicate(name)))
+    name = declineName(name, declension, caseStr);
   return name;
 }
 
@@ -121,7 +116,13 @@ export function applyCase(caseStr: Case, name: string): string {
   return name
     .split(/\s+/)
     .filter(Boolean)
-    .map((name) => applyCaseToName(caseStr, name))
+    .map((name) => {
+      if (mode === "names") return applyCaseToName(caseStr, name);
+      return name
+        .split("-")
+        .map((name) => applyCaseToName(caseStr, name))
+        .join("-");
+    })
     .join(" ");
 }
 
