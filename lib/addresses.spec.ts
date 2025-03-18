@@ -135,7 +135,10 @@ describe("beygla/addresses", () => {
 
     it("applies cases to addresses that only exist in the plural case", () => {
       const cases = ["nf", "þf", "þgf", "ef"] as const;
-      const names = [["Álfheimar", "Álfheima", "Álfheimum", "Álfheima"]];
+      const names = [
+        ["Álfheimar", "Álfheima", "Álfheimum", "Álfheima"],
+        ["Glaðheimar", "Glaðheima", "Glaðheimum", "Glaðheima"],
+      ];
       for (const group of names) {
         const base = group[0];
         for (const [i, caseStr] of cases.entries()) {
