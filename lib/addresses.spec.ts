@@ -17,6 +17,7 @@ if (testingBuild) {
 }
 
 const knownProblemAddresses = [
+  // Singular
   "Efri-Hreppur",
   "Efri-Núpur",
   "Efsta-Grund",
@@ -77,6 +78,16 @@ const knownProblemAddresses = [
   "Ytri-Hóll",
   "Ytri-Hólmur",
   "Ytri-Ós",
+
+  // Plural
+  "Efsta-Kot",
+  "Garðar",
+  "Kot",
+  "Minni-Akrar",
+  "Minni-Ólafsvellir",
+  "Minni-Reykir",
+  "Minni-Vellir",
+  "Ásar",
 ];
 
 const { applyCase } = beygla;
@@ -120,6 +131,20 @@ describe("beygla/addresses", () => {
     it("strips whitespace", () => {
       const sourceName = "  \n  Rauðalækur  \t63\n";
       expect(applyCase("þf", sourceName)).toEqual("Rauðalæk 63");
+    });
+
+    it("applies cases to addresses that only exist in the plural case", () => {
+      const cases = ["nf", "þf", "þgf", "ef"] as const;
+      const names = [
+        ["Álfheimar", "Álfheima", "Álfheimum", "Álfheima"],
+        ["Glaðheimar", "Glaðheima", "Glaðheimum", "Glaðheima"],
+      ];
+      for (const group of names) {
+        const base = group[0];
+        for (const [i, caseStr] of cases.entries()) {
+          expect(applyCase(caseStr, base)).toEqual(group[i]);
+        }
+      }
     });
   });
 });

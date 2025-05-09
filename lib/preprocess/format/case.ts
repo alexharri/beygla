@@ -2,10 +2,16 @@ import { Case } from "../../compress/types";
 
 export function isFirstVariationOfCase(caseString: string): boolean {
   switch (caseString) {
+    // Singular
     case "NFET":
     case "ÞFET":
     case "ÞGFET":
     case "EFET":
+    // Plural
+    case "NFFT":
+    case "ÞFFT":
+    case "ÞGFFT":
+    case "EFFT":
       return true;
   }
   return false;
@@ -14,12 +20,16 @@ export function isFirstVariationOfCase(caseString: string): boolean {
 export function getCase(caseString: string): Case {
   switch (caseString) {
     case "NFET":
+    case "NFFT":
       return Case.Nominative;
     case "ÞFET":
+    case "ÞFFT":
       return Case.Accusative;
     case "ÞGFET":
+    case "ÞGFFT":
       return Case.Dative;
     case "EFET":
+    case "EFFT":
       return Case.Genitive;
     default:
       throw new Error(`Unexpected case '${caseString}'`);
@@ -47,4 +57,8 @@ export function isCasePlural(caseString: string): boolean {
     default:
       throw new Error(`Unexpected case '${caseString}'`);
   }
+}
+
+export function isCaseSingular(caseString: string) {
+  return !isCasePlural(caseString);
 }

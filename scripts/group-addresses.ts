@@ -2,7 +2,7 @@ import path from "path";
 import fs from "fs/promises";
 import { getAddresses } from "../lib/preprocess/data/getNames";
 import { isDefiniteArticle } from "../lib/preprocess/format/article";
-import { isCasePlural } from "../lib/preprocess/format/case";
+import { isCasePlural, isCaseSingular } from "../lib/preprocess/format/case";
 import { formatName, getRawName } from "../lib/preprocess/format/name";
 import { Case, DeclinedName, WordCategory } from "../lib/compress/types";
 import { writeAndLogSize } from "../lib/preprocess/utils/gzip";
@@ -31,7 +31,15 @@ const categoriesInOrderOfPreference = [
 
 async function main() {
   const fileContent = await fs.readFile(addressCasesFilePath, "utf-8");
-  const lines = fileContent.split("\n");
+  const lines = fileContent.split("\n").filter(Boolean);
+
+  const namesInSingularCase = new Set<string>();
+  for (const line of lines) {
+    const rawName = getRawName(line);
+    if (isCaseSingular(rawName.case)) {
+      namesInSingularCase.add(rawName.base);
+    }
+  }
 
   const addresses = getAddresses();
   const addressSet = new Set(addresses);
@@ -40,18 +48,22 @@ async function main() {
     { split: false, postfix: "with-dash" },
     { split: true, postfix: "split-dash" },
   ];
+
   for (const { split, postfix } of configs) {
     const groups: Record<string, DeclinedName[]> = {};
 
     for (const line of lines) {
-      if (line === "") continue;
       const rawName = getRawName(line);
 
       if (!addressSet.has(rawName.base)) {
         continue;
       }
 
-      if (isDefiniteArticle(rawName.case) || isCasePlural(rawName.case)) {
+      const hasSingularVariant = namesInSingularCase.has(rawName.base);
+      if (hasSingularVariant && isCasePlural(rawName.case)) {
+        continue;
+      }
+      if (isDefiniteArticle(rawName.case)) {
         continue;
       }
 

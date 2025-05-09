@@ -197,7 +197,6 @@ function runTests(beygla: typeof import("./beygla"), strict: boolean) {
           "Frederik",
           "Evan",
           "Lennon",
-          "Artemis",
           "Kaín",
         ];
 

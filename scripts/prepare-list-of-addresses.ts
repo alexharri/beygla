@@ -3,6 +3,10 @@ import fs from "fs";
 import { writeAndLogSize } from "../lib/preprocess/utils/gzip";
 import assert from "assert";
 
+const addressesToExclude = new Set([
+  "Hermes", // For some reason, this name is present in 'icelandic-addresses.csv'
+]);
+
 type Keys =
   | "FID"
   | "HNITNUM"
@@ -61,6 +65,8 @@ function main() {
     assert(typeof name === "string" && !!name);
 
     if (name.includes(" ")) continue; // No spaces in address names
+
+    if (addressesToExclude.has(name)) continue;
 
     addresses.add(name);
   }
