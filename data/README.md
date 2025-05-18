@@ -2,23 +2,10 @@
 
 This directory contains the source data that builds upon the trie.
 
-## `icelandic-names.csv`
+## `icelandic-names.json`
 
-The data for 'icelandic-names.csv' is copied from the [Ísland.is GitHub repository](https://github.com/island-is/island.is).
+The data for 'icelandic-names.json' is derived from [https://island.is/leit-i-mannanafnaskra](https://island.is/leit-i-mannanafnaskra).
 
-See [IcelandicName.csv](https://github.com/island-is/island.is/blob/e19b56f4d34ad20e0337ae73140a1c71afb9356c/apps/icelandic-names-registry/backend/data/IcelandicName.csv).
-
-The project uses an MIT license. The `LICENSE` text from repository reads as follows:
-
-```
-Copyright 2020 Digital Iceland
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-```
 
 ## `word-cases.csv`
 
