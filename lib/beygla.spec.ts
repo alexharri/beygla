@@ -169,19 +169,19 @@ function runTests(beygla: typeof import("./beygla"), strict: boolean) {
 
       it("finds correct declension for some unknown names", () => {
         const tests: Array<[name: string, declension: string]> = [
-          ["Sotti", "1;i,a,a,a"],
-          ["Sófía", "1;a,u,u,u"],
-          ["Kórekur", "2;ur,,i,s"],
-          ["Olivia", "1;a,u,u,u"],
-          ["Caritas", "0;,,,ar"],
-          ["Hávarr", "1;r,,i,s"],
-          ["Ermenga", "1;a,u,u,u"],
-          ["Fannþór", "0;,,i,s"],
-          ["Ísbrá", "0;,,,r"],
-          ["Sófús", "0;,,i,ar"],
-          ["Kristólín", "0;,,,ar"],
-          ["Jasper", "0;,,,s"],
-          ["Agok", "0;,,,s"],
+          ["Sotti", "i,a,a,a"],
+          ["Sófía", "a,u,u,u"],
+          ["Kórekur", "ur,,i,s"],
+          ["Olivia", "a,u,u,u"],
+          ["Caritas", ",,,ar"],
+          ["Hávarr", "r,,i,s"],
+          ["Ermenga", "a,u,u,u"],
+          ["Fannþór", ",,i,s"],
+          ["Ísbrá", ",,,r"],
+          ["Sófús", ",,i,ar"],
+          ["Kristólín", ",,,ar"],
+          ["Jasper", ",,,s"],
+          ["Agok", ",,,s"],
         ];
 
         for (const [name, declension] of tests) {

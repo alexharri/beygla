@@ -2,7 +2,6 @@ import { NO_DECLENSION, NO_DECLENSION_MARKER } from "../common/constants";
 import { CompressedTrie } from "../common/types";
 
 const isChar = (c: string) => c === "-" || c.toLowerCase() !== c.toUpperCase();
-const isNumeric = (c: string) => /^[0-9]$/.test(c);
 const validTerminator = (c: string) => ["!", "_"].indexOf(c) !== -1;
 
 type Node = [node: CompressedTrie, done: boolean];
@@ -14,30 +13,17 @@ export function deserializeTrie(str: string): CompressedTrie {
   const next = () => i++;
 
   function deserializeLeaf(): Node {
-    let subtraction = char();
-    next(); // Move beyond number to ';' or '~'
-
     function returnValue(c: string, value: string): Node {
       if (!validTerminator(c)) throw new Error("INV_TER: " + c);
       return [{ value, children: {} }, c === "!"];
     }
 
-    if (subtraction === NO_DECLENSION_MARKER) {
-      const c = char();
+    const firstChar = char();
+
+    if (firstChar === NO_DECLENSION_MARKER) {
       next(); // Move beyond terminator
-      return returnValue(c, NO_DECLENSION);
+      return returnValue(firstChar, NO_DECLENSION);
     }
-
-    // Subtraction may be composed of multiple numbers. Keep searching
-    {
-      let c: string;
-      while (isNumeric((c = char()))) {
-        subtraction += c;
-        next();
-      }
-    }
-
-    next(); // Move to first part
 
     const parts: string[] = [];
 
@@ -55,7 +41,7 @@ export function deserializeTrie(str: string): CompressedTrie {
       next(); // Move beyond terminator or separator
 
       if (i === 3) {
-        return returnValue(c, `${subtraction};${parts.join(",")}`);
+        return returnValue(c, parts.join(","));
       }
 
       // 'c' should be terminator
@@ -96,13 +82,10 @@ export function deserializeTrie(str: string): CompressedTrie {
 
   function deserialize(): Node {
     const c = char();
-    if (c === NO_DECLENSION_MARKER || isNumeric(c)) {
-      return deserializeLeaf();
-    }
     if (c === "{") {
       return deserializeObject();
     }
-    throw new Error("INV_CHAR: " + c);
+    return deserializeLeaf();
   }
 
   return deserialize()[0];

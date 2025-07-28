@@ -28,23 +28,14 @@ function getCaseIndex(caseStr: Case) {
   return 0; // Fall back to 0 if an invalid case was provided
 }
 
-function parseDeclension(declension: string) {
-  const [subtractString, appendicesString] = declension.split(";");
-
-  const subtraction = Number(subtractString);
-  const appendices = (appendicesString || "").split(",");
-
-  return [subtraction, appendices] as const;
-}
-
 function declineName(name: string, declension: string, caseStr: Case): string {
-  const [subtraction, appendices] = parseDeclension(declension);
+  const appendices = declension.split(",");
+  const subtraction = appendices[0].length;
 
   const caseIndex = getCaseIndex(caseStr);
 
   // Should not happen, but prefer being safe
-  if (!Number.isFinite(subtraction)) return name;
-  if (appendices.length !== 4) return name;
+  if (!Number.isFinite(subtraction) || appendices.length !== 4) return name;
 
   const root = name.substr(0, name.length - subtraction);
   return root + appendices[caseIndex];
@@ -61,9 +52,9 @@ function applyCaseToName(caseStr: Case, name: string) {
     const endsWithSon = namesThatEndWithSon.indexOf(name) !== -1;
     if (!endsWithSon) {
       for (const [ending, declension] of [
-        ["son", "2;on,on,yni,onar"],
-        ["dóttir", "2;ir,ur,ur,ur"],
-        ["bur", "0;,,i,s"],
+        ["son", "on,on,yni,onar"],
+        ["dóttir", "ir,ur,ur,ur"],
+        ["bur", ",,i,s"],
       ]) {
         if (!name.endsWith(ending)) continue;
         name = name.split(ending)[0];
@@ -146,7 +137,7 @@ export function getDeclensionForName(name: string): string | null {
     //
     // The name 'Maya' matches this path, but applying the declension erases the
     // entire name.
-    const [_subtraction, appendices] = parseDeclension(declension);
+    const appendices = declension.split(",");
     if (!name.endsWith(appendices[0])) return null;
   }
 
