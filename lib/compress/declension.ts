@@ -18,13 +18,11 @@ export function formatDeclension(names: string[]): string {
     root += char;
   }
 
-  const subtract = name.length - root.length;
-
   function getEnding(name: string) {
     return name.substr(root.length);
   }
 
-  const declension = `${subtract};${names.map(getEnding).join(",")}`;
+  const declension = `${names.map(getEnding).join(",")}`;
 
   if (declension === NO_DECLENSION) return NO_DECLENSION_MARKER;
   return declension;
